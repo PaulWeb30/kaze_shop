@@ -1,8 +1,12 @@
 import React, { FC } from 'react'
 
-const Footer:FC = () => {
+const Footer: FC = () => {
 	return (
-		<div>Footer</div>
+		<footer className='footer'>
+			<div className='container'>
+				<div>Footer</div>
+			</div>
+		</footer>
 	)
 }
 

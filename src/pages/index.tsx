@@ -1,10 +1,4 @@
-import Layout from '@/Layouts/MainLayout'
+import Main from '@/components/screens/Main/Main'
 export default function Home() {
-	return (
-		<>
-			<Layout>
-				<h1>Main page</h1>
-			</Layout>
-		</>
-	)
+	return <Main />
 }

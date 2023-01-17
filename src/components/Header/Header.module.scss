@@ -24,7 +24,7 @@
 		align-items: center;
 	}
 	&__menu {
-		@media (max-width: 750px) {
+		@media (max-width: 840px) {
 			display: none;
 			position: fixed;
 			top: 0;
@@ -39,6 +39,12 @@
 		li {
 			list-style: none;
 			margin: 0px 0px 0px 20px;
+			&:first-child {
+				margin: 0;
+			}
+			@media (max-width: 900px) {
+				margin: 0px 0px 0px 10px;
+			}
 		}
 	}
 	&__link {
@@ -48,6 +54,9 @@
 		font-size: 20px;
 		line-height: 24px;
 		color: #9d9d9d;
+		@media (max-width: 1030px) {
+			font-size: 18px;
+		}
 	}
 	&__logo {
 		font-family: 'Russo One', sans-serif;
@@ -56,15 +65,29 @@
 		font-size: 24px;
 		line-height: 29px;
 		color: #0b0b0b;
+		@media (max-width: 1000px) {
+			font-size: 18px;
+		}
 	}
 	&__info {
 		display: flex;
 		align-items: center;
 		gap: 30px;
+		&_accountSVG {
+			@media (max-width: 400px) {
+				display: none;
+			}
+		}
+		@media (max-width: 1000px) {
+			gap: 10px;
+		}
+		@media (max-width: 834px) {
+			gap: 25px;
+		}
 	}
 	&__burger {
 		display: none;
-		@media (max-width: 750px) {
+		@media (max-width: 840px) {
 			display: block;
 			position: relative;
 			width: 30px;
@@ -102,12 +125,19 @@
 		display: flex;
 		align-items: center;
 		span {
+			font-family: 'Georama', sans-serif;
 			font-style: normal;
-			margin-right: 10px;
-			font-size: 22px;
+			margin-right: 5px;
+			font-size: 18px;
 			font-weight: 500;
 			line-height: 22px;
 			color: #0b0b0b;
+			// @media (max-width: 1000px) {
+			// 	font-size: 16px;
+			// }
+		}
+		@media(max-width: 428px) {
+			display: none;
 		}
 	}
 }
