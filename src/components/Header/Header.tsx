@@ -6,8 +6,9 @@ import shopingCartSVG from '../../assets/icons/ShoppingCart.svg'
 import accountSVG from '../../assets/icons/User.svg'
 import arrowSVG from '../../assets/icons/Arrow.svg'
 const Header: FC = () => {
-	const showBurgerMenu = () => {
-		
+	const [showBurgerMenu, setShowBurgerMenu] = React.useState<boolean>(false)
+	const toogleBurgerMenu = () => {
+		setShowBurgerMenu(prev => !prev)
 	}
 	return (
 		<header className={cl.header}>
@@ -17,7 +18,9 @@ const Header: FC = () => {
 						Kaze Sport
 					</Link>
 
-					<nav className={cl.header__menu}>
+					<nav
+						className={showBurgerMenu ? cl.header__menu_open : cl.header__menu}
+					>
 						<ul className={cl.header__list}>
 							<li>
 								<Link href='#' className={cl.header__link}>
@@ -50,6 +53,12 @@ const Header: FC = () => {
 								</Link>
 							</li>
 						</ul>
+						<ul className={cl.header__menu_languages}>
+							<li>ergergerg</li>
+							<li>ergergerg</li>
+							<li>ergergerg</li>
+							<li>ergergerg</li>
+						</ul>
 					</nav>
 					<div className={cl.header__info}>
 						<div className={cl.header__language}>
@@ -78,7 +87,7 @@ const Header: FC = () => {
 								className={cl.header__info_accountSVG}
 							/>
 						</Link>
-						<div onClick={showBurgerMenu} className={cl.header__burger}>
+						<div onClick={toogleBurgerMenu} className={cl.header__burger}>
 							<span></span>
 						</div>
 					</div>
