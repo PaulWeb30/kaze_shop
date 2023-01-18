@@ -24,7 +24,7 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
 			<div className='wrapper'>
 				<Header />
 				{children}
-				<Footer />
+				{/* <Footer /> */}
 			</div>
 		</>
 	)
