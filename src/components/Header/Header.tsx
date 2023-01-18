@@ -17,11 +17,15 @@ const Header: FC = () => {
 					<Link href={'/'} className={cl.header__logo}>
 						Kaze Sport
 					</Link>
-
 					<nav
 						className={showBurgerMenu ? cl.header__menu_open : cl.header__menu}
 					>
 						<ul className={cl.header__list}>
+							<li className={cl.header__list_account}>
+								<Link href='#' className={cl.header__list_link}>
+									Личный кабинет
+								</Link>
+							</li>
 							<li>
 								<Link href='#' className={cl.header__link}>
 									Лосины
@@ -54,10 +58,10 @@ const Header: FC = () => {
 							</li>
 						</ul>
 						<ul className={cl.header__menu_languages}>
-							<li>ergergerg</li>
-							<li>ergergerg</li>
-							<li>ergergerg</li>
-							<li>ergergerg</li>
+							<li>Український</li>
+							<li>Русский</li>
+							<li>Serbskiy</li>
+							<li>English</li>
 						</ul>
 					</nav>
 					<div className={cl.header__info}>
@@ -70,7 +74,7 @@ const Header: FC = () => {
 								height={18}
 							/>
 						</div>
-						<Link href={'/'}>
+						<Link href={'/cart'}>
 							<Image
 								src={shopingCartSVG}
 								alt='link to user basket'
@@ -78,7 +82,7 @@ const Header: FC = () => {
 								height={28}
 							/>
 						</Link>
-						<Link href={'/4'}>
+						<Link href={'/cabinet'}>
 							<Image
 								src={accountSVG}
 								alt='link to user cabiner'

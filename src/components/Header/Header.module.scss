@@ -26,44 +26,69 @@
 	&__menu {
 		@media (max-width: 840px) {
 			position: fixed;
-			left: 0;
-			top: -300%;
+			left: -300%;
+			top: 0;
+			transition: left 0.4s linear;
 		}
 		&_languages {
-			display: flex;
+			display: none;
 			flex-wrap: wrap;
-			flex: 1 1 auto;
-			li {
+			@media (max-width: 840px) {
 				display: flex;
+			}
+			li {
+				display: none;
+				min-width: 208px;
 				padding: 16px 20px;
 				font-family: 'Georama', sans-serif;
 				font-style: normal;
 				font-weight: 500;
 				font-size: 20px;
-				background: #f2f2f0;
+				line-height: 24px;
+				background-color: #ecece8;
+				color: #9d9d9d;
 				min-width: 100px;
-				border: 1.5px solid #9d9d9d;
+				border-bottom: 1.5px solid #9d9d9d;
+				border-right: 1.5px solid #9d9d9d;
+
+				@media (max-width: 840px) {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					flex: 1 1 25%;
+				}
+				@media (max-width: 460px) {
+					flex: 1 1 50%;
+				}
+			}
+			li:hover {
+				background-color: #0b0b0b;
+				color: #fff;
+				transition: background-color 0.4s linear;
 			}
 		}
 
 		&_open {
-			position: fixed;
-			top: 80px;
-			left: 0;
-			width: 100%;
-			height: auto;
-			background: #ecece8;
-			transition: top;
+			@media (max-width: 840px) {
+				position: fixed;
+				top: 80px;
+				left: 0;
+				width: 100%;
+				height: auto;
+				background: #ecece8;
+				transition: left 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+			}
 		}
 	}
 	&__list {
 		display: flex;
-		li {
+		li:not(:first-child) {
 			list-style: none;
 			margin: 0px 0px 0px 20px;
 			&:first-child {
 				margin: 0;
 			}
+
 			@media (max-width: 900px) {
 				margin: 0px 0px 0px 10px;
 			}
@@ -74,10 +99,37 @@
 				position: relative;
 				&::after {
 					position: absolute;
-					content: '2';
+					content: url('../../assets/icons/headerArrow.svg');
 					right: 4%;
 				}
 			}
+		}
+		&_account {
+			display: none;
+			padding: 16px 0px 16px 24px;
+			border-bottom: 1.5px solid #9d9d9d;
+			position: relative;
+			&::before {
+				position: absolute;
+				content: url('../../assets/icons/User_gray.svg');
+				left: 6%;
+				top: 60%;
+				transform: translateY(-50%);
+				margin-right: 10px;
+				padding-right: 10px;
+			}
+			@media (max-width: 400px) {
+				display: block;
+			}
+		}
+		&_link {
+			font-family: 'Georama', sans-serif;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 18px;
+			line-height: 24px;
+			color: #9d9d9d;
+			padding-left: 40px;
 		}
 		@media (max-width: 840px) {
 			flex-direction: column;
