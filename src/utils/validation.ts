@@ -20,11 +20,8 @@ export const LoginFormSchema = yup.object().shape({
 export const RegisterFormSchema = yup
 	.object()
 	.shape({
-		firstName: yup
-			.string()
-			.required('Name required')
-			.min(2, 'minimum 2 symbols'),
-		surName: yup
+		name: yup.string().required('Name required').min(2, 'minimum 2 symbols'),
+		surname: yup
 			.string()
 			.required('surname required')
 			.min(2, 'minimum 2 symbols'),
