@@ -10,3 +10,135 @@
 .content {
 	margin-top: 104px;
 }
+
+.page_coordinator {
+	font-family: 'Georama', sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 22px;
+	color: #9d9d9d;
+	margin-bottom: 50px;
+	span {
+		color: #0b0b0b;
+	}
+}
+
+.auth {
+	&_block {
+		display: flex;
+		gap: 2%;
+	}
+	&_title {
+		font-family: 'Russo One';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 32px;
+		line-height: 39px;
+		margin-bottom: 20px;
+		color: #0b0b0b;
+	}
+	&_form {
+		font-family: 'Georama', sans-serif;
+		display: flex;
+		flex-direction: column;
+		max-width: 390px;
+	}
+	&_field {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		gap: 10px;
+		margin-bottom: 35px;
+	}
+	&_label {
+		font-family: 'Georama', sans-serif;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 24px;
+		color: #0b0b0b;
+	}
+	&_input {
+		border: 1.5px solid #9d9d9d;
+		padding: 14px 0px 14px 20px;
+		input {
+			font-family: 'Georama', sans-serif;
+			font-style: normal;
+			font-weight: 400;
+			font-size: 18px;
+			line-height: 22px;
+			color: #9d9d9d;
+			width: 95%;
+			border: none;
+			outline: none;
+		}
+		input:-webkit-autofill {
+			background-color: transparent;
+		}
+	}
+	&_detail {
+		display: flex;
+		justify-content: space-between;
+		&_link {
+			font-family: 'Georama', sans-serif;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 18px;
+			line-height: 22px;
+			color: #0b0b0b;
+		}
+	}
+	&_checkbox {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		span {
+			font-family: inherit;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 18px;
+			line-height: 22px;
+			color: #9d9d9d;
+		}
+		input {
+			height: 50px;
+			width: 30px;
+			height: 30px;
+			border: 1.5px solid #0b0b0b;
+			cursor: pointer;
+			&::placeholder {
+				background-color: transparent;
+			}
+		}
+	}
+	&_btn {
+		display: block;
+		background: #0b0b0b;
+		color: #ffff;
+		padding: 16px 0;
+		text-align: center;
+		margin: 50px 0px 15px;
+		width: 100%;
+	}
+	&_error {
+		font-family: inherit;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		color: #e73232;
+	}
+	&_link {
+		font-family: 'Georama', sans-serif;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 22px;
+		color: #9d9d9d;
+		span {
+			color: #0b0b0b;
+		}
+	}
+}
