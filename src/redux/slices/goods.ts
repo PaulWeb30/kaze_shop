@@ -8,7 +8,7 @@ const slice = createSlice({
 		[HYDRATE]: (state, action) => {
 			return {
 				...state,
-				...action.payload.user,
+				...action.payload.goods,
 			}
 		},
 	},

@@ -5,19 +5,20 @@ import { LoginDto } from '@/types/auth'
 import { setCookie } from 'nookies'
 import axios from 'axios'
 import { LoginFormSchema } from '../utils/validation'
+import { Api } from '@/services'
 const Login = () => {
 	const loginForm = useForm<LoginDto>({
 		mode: 'onChange',
 		resolver: yupResolver(LoginFormSchema),
 	})
 
-	const onSubmit = (dto: LoginDto) => {
+	const onSubmit = async (dto: LoginDto) => {
 		try {
-			console.log('send', dto)
-			// setCookie(null, 'rtoken', '2', {
-			// 	maxAge: 30 * 24 * 60 * 60,
-			// 	path: '/',
-			// })
+			const data =  await Api().user.login(dto)
+			setCookie(null, 'token', data.token, {
+				maxAge: 30 * 24 * 60 * 60,
+				path: '/',
+			})
 		} catch (err) {
 			console.warn('Register error', err)
 			if (err.response) {
@@ -31,7 +32,7 @@ const Login = () => {
 			<div className='container'>
 				<form onSubmit={loginForm.handleSubmit(onSubmit)}>
 					<p>
-						email1231
+						email
 						<input type='text' {...loginForm.register('email')} />
 						{loginForm.formState.errors.email &&
 							loginForm.formState.errors.email.message}
