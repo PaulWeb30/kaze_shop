@@ -6,6 +6,7 @@ import { UserApi } from './UserService'
 export type ApiReturnType = {
 	user: ReturnType<typeof UserApi>
 }
+export const API_URL = 'http://[::1]:7457/'
 
 export const Api = (
 	ctx?: NextPageContext | GetServerSidePropsContext
@@ -14,7 +15,7 @@ export const Api = (
 	const token = cookies.token
 
 	const instance = axios.create({
-		baseURL: 'http://localhost:7777',
+		baseURL: API_URL,
 		headers: {
 			Authorization: 'Bearer ' + token,
 		},

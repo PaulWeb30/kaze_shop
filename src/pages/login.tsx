@@ -3,10 +3,13 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoginDto } from '@/types/auth'
 import { setCookie } from 'nookies'
-import axios from 'axios'
+import Link from 'next/link'
 import { LoginFormSchema } from '../utils/validation'
+import { addUserInfo } from '@/redux/slices/user'
+import { useAppDispatch } from '@/redux/hooks'
 import { Api } from '@/services'
 const Login = () => {
+	const dispatch = useAppDispatch()
 	const loginForm = useForm<LoginDto>({
 		mode: 'onChange',
 		resolver: yupResolver(LoginFormSchema),
@@ -14,11 +17,12 @@ const Login = () => {
 
 	const onSubmit = async (dto: LoginDto) => {
 		try {
-			const data =  await Api().user.login(dto)
-			setCookie(null, 'token', data.token, {
+			const data = await Api().user.login(dto)
+			setCookie(null, 'token', data.accessToken, {
 				maxAge: 30 * 24 * 60 * 60,
 				path: '/',
 			})
+			dispatch(addUserInfo(data.user))
 		} catch (err) {
 			console.warn('Register error', err)
 			if (err.response) {
@@ -46,7 +50,7 @@ const Login = () => {
 
 					<button type='submit'>login</button>
 				</form>
-				<div></div>
+				<Link href='/signup'>signup</Link>
 			</div>
 		</main>
 	)

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { CreateUserDto } from '@/types/auth'
 import { RegisterFormSchema } from '@/utils/validation'
+import { Api } from '@/services'
 const Signup = () => {
 	const signupForm = useForm<CreateUserDto>({
 		mode: 'onChange',
@@ -11,11 +12,7 @@ const Signup = () => {
 
 	const onSubmit = async (dto: CreateUserDto) => {
 		try {
-			console.log('send', dto)
-			// setCookie(null, 'rtoken', '2', {
-			// 	maxAge: 30 * 24 * 60 * 60,
-			// 	path: '/',
-			// })
+			await Api().user.registration(dto)
 		} catch (err) {
 			console.warn('Register error', err)
 			if (err.response) {
@@ -63,7 +60,6 @@ const Signup = () => {
 						{signupForm.formState.errors.confirmPassword &&
 							signupForm.formState.errors.confirmPassword.message}
 					</p>
-
 					<button type='submit'>signup</button>
 				</form>
 				<div></div>

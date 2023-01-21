@@ -1,16 +1,23 @@
-import { LoginDto } from '@/types/auth'
+import { CreateUserDto, LoginDto, AuthResponse } from '@/types/auth'
 import { AxiosResponse, AxiosInstance } from 'axios'
 
 export const UserApi = (instance: AxiosInstance) => ({
-	async login(dto: { email: string }) {
-		const { data } = await instance.post<LoginDto, { data: { token: string } }>(
+	async login(dto: LoginDto) {
+		const { data } = await instance.post<LoginDto, { data: AuthResponse }>(
 			'/auth/login',
 			dto
 		)
 		return data
 	},
+	async registration(dto: CreateUserDto) {
+		const { data } = await instance.post<LoginDto, { data: AuthResponse }>(
+			'/auth/signup',
+			dto
+		)
+		return data
+	},
 	async getMe() {
-		const { data } = await instance.get('/auth/login')
+		const { data } = await instance.get('/auth/refresh')
 		return data
 	},
 })

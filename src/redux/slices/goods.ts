@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { HYDRATE } from 'next-redux-wrapper'
-const slice = createSlice({
+const goodsSlice = createSlice({
 	name: 'test',
 	initialState: {},
 	reducers: {},
@@ -14,4 +14,4 @@ const slice = createSlice({
 	},
 })
 
-export default slice.reducer
+export default goodsSlice.reducer
