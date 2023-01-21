@@ -11,7 +11,6 @@ import Image from 'next/image'
 import AuthImg from '../assets/images/auth_photo.png'
 import { Api } from '@/services'
 import { useRouter } from 'next/router'
-import { Router } from 'next/router'
 const Login = () => {
 	const dispatch = useAppDispatch()
 	const router = useRouter()
