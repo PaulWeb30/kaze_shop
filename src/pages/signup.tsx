@@ -46,20 +46,31 @@ const Signup = () => {
 					<div className='auth_form'>
 						<h3 className='auth_title'>Регистрация</h3>
 						<form onSubmit={signupForm.handleSubmit(onSubmit)}>
-							<div className='auth_field'>
-								<label className='auth_label' htmlFor='name'>
-									Name
-								</label>
-								<input type='text' {...signupForm.register('name')} />
-								{signupForm.formState.errors.name &&
-									signupForm.formState.errors.name.message}
-							</div>
-							<p>
-								surname
-								<input type='text' {...signupForm.register('surname')} />
-								{signupForm.formState.errors.surname &&
-									signupForm.formState.errors.surname.message}
-							</p>
+							<div className='register_form'>
+								<div className='auth_field'>
+									<label className='auth_label' htmlFor='name'>
+										Имя
+									</label>
+									<div className='auth_input'>
+									<input autoComplete='off'
+										placeholder='Введите имя'
+										type='text' {...signupForm.register('name')} />
+									{signupForm.formState.errors.name &&
+										signupForm.formState.errors.name.message}</div>
+								</div>
+								<div className='auth_field'>
+									<label className='auth_label' htmlFor='surname'>
+										Фамилия
+									</label>
+									<div className='auth_input'>
+									<input autoComplete='off'
+										placeholder='Введите фамилию'
+										type='text' {...signupForm.register('surname')} />
+									{signupForm.formState.errors.surname &&
+										signupForm.formState.errors.surname.message}</div>
+								</div>
+							
+							
 							<div className='auth_field'>
 								<label className='auth_label' htmlFor='email'>
 									E-mail
@@ -74,36 +85,61 @@ const Signup = () => {
 								</div>
 								<span className='auth_error'>
 									{signupForm.formState.errors.email &&
-										signupForm.formState.errors.email.message}
+									signupForm.formState.errors.email.message}
 								</span>
-							</div>
-							<p>
-								phoneNumber
-								<input type='tel' {...signupForm.register('phoneNumber')} />
-								{signupForm.formState.errors.phoneNumber &&
-									signupForm.formState.errors.phoneNumber.message}
-							</p>
-							<p>
-								password
-								<input type='text' {...signupForm.register('password')} />
-								{signupForm.formState.errors.password &&
-									signupForm.formState.errors.password.message}
-							</p>
-							<p>
-								confirm password
-								<input
-									type='text'
+								</div>
+								<div className='auth_field mgbt'>
+									<label className='auth_label' htmlFor='phoneNumber'>
+										Номер телефона
+									</label>
+									<div className='auth_input'>
+									<input autoComplete='off'
+										placeholder='+38 (---) --- -- --'
+										type='text' {...signupForm.register('phoneNumber')} />
+									{signupForm.formState.errors.phoneNumber &&
+									signupForm.formState.errors.phoneNumber.message}</div>
+								</div>
+							
+								<div className='auth_field'>
+									<label className='auth_label' htmlFor='password'>
+										Пароль
+									</label>
+									<div className='auth_input'>
+									<input autoComplete='off'
+										placeholder='Введите пароль'
+										type='text'{...signupForm.register('password')} />
+									{signupForm.formState.errors.password &&
+									signupForm.formState.errors.password.message}</div>
+								</div>
+								<div className='auth_field'>
+									<label className='auth_label' htmlFor='confirmPassword'>
+										Повторите пароль
+									</label>
+									<div className='auth_input'>
+									<input
+										autoComplete='off'
+										placeholder='Повторите пароль'
+										type='text'
 									{...signupForm.register('confirmPassword')}
-								/>
-								{signupForm.formState.errors.confirmPassword &&
-									signupForm.formState.errors.confirmPassword.message}
-							</p>
-							<button type='submit'>signup</button>
+									/>
+									{signupForm.formState.errors.confirmPassword &&
+									signupForm.formState.errors.confirmPassword.message}</div>
+								</div>
+							</div>
+							<div className='auth_privacy'> 
+								<input type="checkbox" /> 
+								Я согласен с условиями 
+								<Link href='/' className='auth_privacy_link'>Политики конфиденциальности</Link>
+							</div>
+							<button className='auth_btn wdth' type='submit'>
+								Зарегистрироваться
+							</button>
 						</form>
+						<Link className='auth_link' href='/login'>
+							Уже есть аккаунт? <span>Войти</span>
+						</Link>
 					</div>
 				</div>
-
-				<Link href='/login'>login</Link>
 			</div>
 		</main>
 	)
