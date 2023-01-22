@@ -82,11 +82,32 @@
 			width: 95%;
 			border: none;
 			outline: none;
+			position: relative;
 		}
 
 		input:-webkit-autofill {
 			background-color: transparent;
 		}
+	}
+
+	&_phoneInput {
+		font-family: 'Georama', sans-serif !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		font-size: 18px !important;
+		line-height: 22px !important;
+		color: #9d9d9d !important;
+		width: 95%;
+		border: none !important;
+		outline: none !important;
+		position: relative;
+		height: auto !important;
+		padding-left: 30px !important;
+	}
+
+	&_dropdown {
+		border-radius: 0px !important;
+		left: 0 !important;
 	}
 
 	&_detail {
@@ -138,6 +159,10 @@
 		text-align: center;
 		margin: 50px 0px 15px;
 		width: 100%;
+
+		&:disabled {
+			opacity: 0.2;
+		}
 	}
 
 	&_error {
@@ -168,7 +193,7 @@
 		font-weight: 500;
 		font-size: 20px;
 		line-height: 22px;
-		color: #9D9D9D;
+		color: #9d9d9d;
 		display: flex;
 		align-items: center;
 		gap: 8px;
@@ -197,7 +222,6 @@
 .wdth {
 	width: 390px;
 }
-
 
 @media(max-width: 1200px) {}
 
@@ -245,4 +269,9 @@
 	.auth_detail_link {
 		margin-top: 5px;
 	}
+}
+
+.react-tel-input div.flag-dropdown {
+	left: 0 !important;
+	border-radius: 0px !important;
 }
