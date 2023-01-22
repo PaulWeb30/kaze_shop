@@ -106,7 +106,7 @@ const Signup = () => {
 											signupForm.formState.errors.email.message}
 									</span>
 								</div>
-								<div className='auth_field mgbt'>
+								{/* <div className='auth_field mgbt'>
 									<label className='auth_label' htmlFor='phoneNumber'>
 										Номер телефона
 									</label>
@@ -122,7 +122,7 @@ const Signup = () => {
 										{signupForm.formState.errors.phoneNumber &&
 											signupForm.formState.errors.phoneNumber.message}
 									</span>
-								</div>
+								</div> */}
 								<div className='auth_field'>
 									<PhoneInput
 										specialLabel={''}
@@ -130,6 +130,7 @@ const Signup = () => {
 										onlyCountries={['ua', 'rs']}
 										value={phoneNumberValue}
 										onChange={phone => handlePhoneNumberValue(phone)}
+										containerClass={'auth_field'}
 										inputProps={{
 											name: 'phone2',
 											required: true,
