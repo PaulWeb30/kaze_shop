@@ -137,7 +137,11 @@ const Signup = () => {
 									<label className='auth_label' htmlFor='phoneNumber'>
 										Номер телефона
 									</label>
+<<<<<<< HEAD
+									<PhoneInput 
+=======
 									<PhoneInput
+>>>>>>> bc3cce8ed0aebf19626b36a2b334aae9f667d294
 										specialLabel={''}
 										autocompleteSearch={false}
 										country={'ua'}
