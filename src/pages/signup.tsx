@@ -124,7 +124,10 @@ const Signup = () => {
 									</span>
 								</div> */}
 								<div className='auth_field'>
-									<PhoneInput
+									<label className='auth_label' htmlFor='phoneNumber'>
+										Номер телефона
+									</label>
+									<PhoneInput 
 										specialLabel={''}
 										country={'ua'}
 										onlyCountries={['ua', 'rs']}
