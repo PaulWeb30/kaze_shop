@@ -124,15 +124,18 @@ const Signup = () => {
 									</span>
 								</div> */}
 								<div className='auth_field'>
+									<label className='auth_label' htmlFor='phoneNumber'>
+										Номер телефона
+									</label>
 									<PhoneInput
 										specialLabel={''}
 										country={'ua'}
 										onlyCountries={['ua', 'rs']}
 										value={phoneNumberValue}
 										onChange={phone => handlePhoneNumberValue(phone)}
-										containerClass={'auth_field'}
+										containerClass={'auth_input'}
 										inputProps={{
-											name: 'phone2',
+											name: 'phone',
 											required: true,
 											autoFocus: true,
 										}}
