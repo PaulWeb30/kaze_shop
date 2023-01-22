@@ -20,12 +20,15 @@ export const LoginFormSchema = yup.object().shape({
 export const RegisterFormSchema = yup
 	.object()
 	.shape({
-		name: yup.string().required('Name required').min(2, 'minimum 2 symbols'),
+		name: yup.string().required('Name required').min(2, 'Minimum 2 symbols'),
 		surname: yup
 			.string()
-			.required('surname required')
-			.min(2, 'minimum 2 symbols'),
-		phoneNumber: yup.string().required('number required'),
+			.required('Surname required')
+			.min(2, 'Minimum 2 symbols'),
+		phoneNumber: yup
+			.string()
+			.required('Number required')
+			.min(9, 'Incorrect number'),
 		confirmPassword: yup
 			.string()
 			.oneOf([yup.ref('password'), null], 'Passwords must match'),
