@@ -25,6 +25,10 @@ export const RegisterFormSchema = yup
 			.string()
 			.required('Surname required')
 			.min(2, 'Minimum 2 symbols'),
+		// phoneNumber: yup
+		// 	.string()
+		// 	.required('Number required')
+		// 	.min(9, 'Incorrect number'),
 		confirmPassword: yup
 			.string()
 			.oneOf([yup.ref('password'), null], 'Passwords must match'),

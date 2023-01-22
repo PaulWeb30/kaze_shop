@@ -13,6 +13,7 @@ import { Api } from '@/services'
 const Signup = () => {
 	const router = useRouter()
 	const [phoneNumberValue, setPhoneNumberValue] = useState<string>('')
+	const [phoneNumberError, setPhoneNumberError] = useState<string>('')
 	const [privacyPolicyState, setPrivacyPolicyState] = useState<boolean>(false)
 	const signupForm = useForm<CreateUserDto>({
 		mode: 'onChange',
@@ -20,18 +21,29 @@ const Signup = () => {
 	})
 
 	const onSubmit = async (dto: CreateUserDto) => {
-		try {
-			await Api().user.registration(dto)
-		} catch (err) {
-			console.warn('Register error', err)
-			if (err.response) {
-				console.warn('Register error', err.response.data.message)
-			}
-			router.push('/404')
+		// try {
+		// 	await Api().user.registration(dto)
+		// } catch (err) {
+		// 	console.warn('Register error', err)
+		// 	if (err.response) {
+		// 		console.warn('Register error', err.response.data.message)
+		// 	}
+		// 	router.push('/404')
+		// }
+
+		const data = {
+			...dto,
+			phoneNumber: '+' + phoneNumberValue,
+		}
+		if (!phoneNumberError) {
+			console.log(data)
 		}
 	}
 
 	const handlePhoneNumberValue = (value: string) => {
+		if (!phoneNumberValue.startsWith('38') && phoneNumberValue.length >= 13) {
+			setPhoneNumberError('Incorrect number')
+		}
 		setPhoneNumberValue(value)
 	}
 	return (
@@ -61,7 +73,6 @@ const Signup = () => {
 									</label>
 									<div className='auth_input'>
 										<input
-											autoComplete='off'
 											placeholder='Введите имя'
 											type='text'
 											{...signupForm.register('name')}
@@ -78,7 +89,6 @@ const Signup = () => {
 									</label>
 									<div className='auth_input'>
 										<input
-											autoComplete='off'
 											placeholder='Введите фамилию'
 											type='text'
 											{...signupForm.register('surname')}
@@ -96,7 +106,6 @@ const Signup = () => {
 									</label>
 									<div className='auth_input'>
 										<input
-											autoComplete='off'
 											placeholder='Введите e-mail'
 											type='text'
 											{...signupForm.register('email')}
@@ -130,6 +139,7 @@ const Signup = () => {
 									</label>
 									<PhoneInput
 										specialLabel={''}
+										autocompleteSearch={false}
 										country={'ua'}
 										onlyCountries={['ua', 'rs']}
 										value={phoneNumberValue}
@@ -144,6 +154,9 @@ const Signup = () => {
 											autoFocus: true,
 										}}
 									/>
+									<span className='auth_error'>
+										{phoneNumberError && phoneNumberError}
+									</span>
 								</div>
 								<div className='auth_field'>
 									<label className='auth_label' htmlFor='password'>
@@ -151,7 +164,6 @@ const Signup = () => {
 									</label>
 									<div className='auth_input'>
 										<input
-											autoComplete='off'
 											placeholder='Введите пароль'
 											type='text'
 											{...signupForm.register('password')}
@@ -168,7 +180,6 @@ const Signup = () => {
 									</label>
 									<div className='auth_input'>
 										<input
-											autoComplete='off'
 											placeholder='Повторите пароль'
 											type='text'
 											{...signupForm.register('confirmPassword')}

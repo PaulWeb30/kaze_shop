@@ -64,7 +64,6 @@ const Login = () => {
 								</label>
 								<div className='auth_input'>
 									<input
-										autoComplete='off'
 										placeholder='Введите e-mail'
 										type='text'
 										{...loginForm.register('email')}
@@ -81,7 +80,6 @@ const Login = () => {
 								</label>
 								<div className='auth_input'>
 									<input
-										autoComplete='off'
 										placeholder='Введите пароль'
 										type='text'
 										{...loginForm.register('password')}
