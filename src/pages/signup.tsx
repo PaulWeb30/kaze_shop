@@ -13,6 +13,7 @@ import { Api } from '@/services'
 const Signup = () => {
 	const router = useRouter()
 	const [phoneNumberValue, setPhoneNumberValue] = useState<string>('')
+	const [privacyPolicyState, setPrivacyPolicyState] = useState<boolean>(false)
 	const signupForm = useForm<CreateUserDto>({
 		mode: 'onChange',
 		resolver: yupResolver(RegisterFormSchema),
@@ -134,6 +135,9 @@ const Signup = () => {
 										value={phoneNumberValue}
 										onChange={phone => handlePhoneNumberValue(phone)}
 										containerClass={'auth_input'}
+										inputClass={'auth_phoneInput'}
+										dropdownClass={'auth_dropdown'}
+										placeholder='+38 (---) --- -- --'
 										inputProps={{
 											name: 'phone',
 											required: true,
@@ -178,14 +182,22 @@ const Signup = () => {
 							</div>
 							<div className='auth_privacy'>
 								<div className='auth_checkbox'>
-									<input type='checkbox' />
+									<input
+										type='checkbox'
+										defaultChecked={privacyPolicyState}
+										onChange={() => setPrivacyPolicyState(prev => !prev)}
+									/>
 									<span>Я согласен с условиями</span>
 								</div>
 								<Link href='#' target={'_blank'} className='auth_privacy_link'>
 									Политики конфиденциальности
 								</Link>
 							</div>
-							<button className='auth_btn wdth' type='submit'>
+							<button
+								disabled={!privacyPolicyState}
+								className='auth_btn wdth'
+								type='submit'
+							>
 								Зарегистрироваться
 							</button>
 						</form>
