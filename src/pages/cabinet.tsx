@@ -1,5 +1,5 @@
 import React from 'react'
-import { withAuth } from '@/hoc/AuthHoc'
+import { withAuth } from '@/hoc/RequiredAuth'
 import axios from 'axios'
 import { NextPage } from 'next'
 interface Props {

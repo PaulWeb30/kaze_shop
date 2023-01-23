@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoginDto } from '@/types/auth'
 import { setCookie } from 'nookies'
+import { NotAuthorized } from '@/hoc/OnlyNotAuthorized'
 import Link from 'next/link'
 import { LoginFormSchema } from '../utils/validation'
 import { addUserInfo } from '@/redux/slices/user'
@@ -23,10 +24,16 @@ const Login = () => {
 	const onSubmit = async (dto: LoginDto) => {
 		try {
 			const data = await Api().user.login(dto)
+			setCookie(null, 'token', data.accessToken, {
+				maxAge: 30 * 24 * 60 * 60,
+				path: '/',
+			})
+			dispatch(addUserInfo(data.user))
+			router.push('/cabinet')
 		} catch (err) {
 			console.warn('Register error', err)
 			if (err.response) {
-				console.warn('Register error', err.response.data.message)
+				console.warn('Register error after response', err.response.data.message)
 				setErrorMessage(err.response.data.message)
 			}
 			router.push('/404')
@@ -112,5 +119,9 @@ const Login = () => {
 		</main>
 	)
 }
+
+export const getServerSideProps = NotAuthorized(async context => {
+	return { props: {} }
+})
 
 export default Login

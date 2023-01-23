@@ -4,6 +4,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { CreateUserDto } from '@/types/auth'
+import { NotAuthorized } from '@/hoc/OnlyNotAuthorized'
 import { RegisterFormSchema } from '@/utils/validation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -15,6 +16,7 @@ import { Api } from '@/services'
 
 const Signup = () => {
 	const router = useRouter()
+	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [phoneNumberValue, setPhoneNumberValue] = useState<string>('')
 	const [phoneNumberError, setPhoneNumberError] = useState<string>('')
 	const [passwordShown, setPasswordShown] = useState(false)
@@ -37,10 +39,12 @@ const Signup = () => {
 		}
 		try {
 			await Api().user.registration(data)
+			router.push('/login')
 		} catch (err) {
 			console.warn('Register error', err)
 			if (err.response) {
 				console.warn('Register error', err.response.data.message)
+				setErrorMessage(err.response.data.message)
 			}
 			router.push('/404')
 		}
@@ -125,23 +129,6 @@ const Signup = () => {
 											signupForm.formState.errors.email.message}
 									</span>
 								</div>
-								{/* <div className='auth_field mgbt'>
-									<label className='auth_label' htmlFor='phoneNumber'>
-										Номер телефона
-									</label>
-									<div className='auth_input'>
-										<input
-											autoComplete='off'
-											placeholder='+38 (---) --- -- --'
-											type='text'
-											{...signupForm.register('phoneNumber')}
-										/>
-									</div>
-									<span className='auth_error'>
-										{signupForm.formState.errors.phoneNumber &&
-											signupForm.formState.errors.phoneNumber.message}
-									</span>
-								</div> */}
 								<div className='auth_field'>
 									<label className='auth_label' htmlFor='phoneNumber'>
 										Номер телефона
@@ -157,7 +144,6 @@ const Signup = () => {
 										containerClass={'auth_input'}
 										inputClass={'auth_phoneInput'}
 										dropdownClass={'auth_dropdown'}
-										placeholder='+38 (---) --- -- --'
 										inputProps={{
 											name: 'phoneNumber',
 											required: true,
@@ -235,6 +221,9 @@ const Signup = () => {
 									Политики конфиденциальности
 								</Link>
 							</div>
+							{errorMessage && (
+								<span className='auth_error'>{errorMessage}</span>
+							)}
 							<button
 								disabled={!privacyPolicyState}
 								className='auth_btn wdth'
@@ -252,5 +241,7 @@ const Signup = () => {
 		</main>
 	)
 }
-
+export const getServerSideProps = NotAuthorized(async context => {
+	return { props: {} }
+})
 export default Signup
