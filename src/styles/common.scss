@@ -58,7 +58,12 @@
 		gap: 10px;
 		margin-bottom: 35px;
 	}
-
+	&_hidden-icon {
+		position: absolute;
+		top: 50%;
+		right: 4%;
+		transform: translateY(-50%);
+	}
 	&_label {
 		font-family: 'Georama', sans-serif;
 		font-style: normal;
@@ -71,7 +76,7 @@
 	&_input {
 		border: 1.5px solid #9d9d9d;
 		padding: 14px 0px 14px 20px;
-
+		position: relative;
 		input {
 			font-family: 'Georama', sans-serif;
 			font-style: normal;
@@ -82,7 +87,6 @@
 			width: 95%;
 			border: none;
 			outline: none;
-			position: relative;
 		}
 
 		input:-webkit-autofill {
@@ -223,7 +227,7 @@
 	width: 390px;
 }
 
-@media(max-width: 1300px) {
+@media (max-width: 1300px) {
 	.wdth {
 		width: 290px;
 	}
@@ -233,14 +237,13 @@
 	}
 }
 
-@media(max-width: 1159px) {
+@media (max-width: 1159px) {
 	.register_form {
-
 		justify-content: flex-start;
 	}
 }
 
-@media(max-width: 800px) {
+@media (max-width: 800px) {
 	.auth_field {
 		width: 300px;
 	}
@@ -256,7 +259,6 @@
 	}
 
 	.register_form {
-
 		justify-content: center;
 	}
 
@@ -277,7 +279,7 @@
 	}
 }
 
-@media(max-width: 650px) {
+@media (max-width: 650px) {
 	.auth_block {
 		justify-content: center;
 	}

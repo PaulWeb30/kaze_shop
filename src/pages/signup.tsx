@@ -8,12 +8,16 @@ import { RegisterFormSchema } from '@/utils/validation'
 import Link from 'next/link'
 import Image from 'next/image'
 import AuthImg from '../assets/images/auth_photo.png'
+import hidenIcon from '../assets/icons/EyeClosed.svg'
 import { useRouter } from 'next/router'
 import { Api } from '@/services'
+
 const Signup = () => {
 	const router = useRouter()
 	const [phoneNumberValue, setPhoneNumberValue] = useState<string>('')
 	const [phoneNumberError, setPhoneNumberError] = useState<string>('')
+	const [passwordShown, setPasswordShown] = useState(false)
+	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
 	const [privacyPolicyState, setPrivacyPolicyState] = useState<boolean>(false)
 	const signupForm = useForm<CreateUserDto>({
 		mode: 'onChange',
@@ -26,25 +30,27 @@ const Signup = () => {
 		} else {
 			setPhoneNumberError('')
 		}
-		// try {
-		// 	await Api().user.registration(dto)
-		// } catch (err) {
-		// 	console.warn('Register error', err)
-		// 	if (err.response) {
-		// 		console.warn('Register error', err.response.data.message)
-		// 	}
-		// 	router.push('/404')
-		// }
-
 		const data = {
 			...dto,
 			phoneNumber: phoneNumberValue,
 		}
-		if (!phoneNumberError) {
-			console.log(data)
+		try {
+			await Api().user.registration(data)
+		} catch (err) {
+			console.warn('Register error', err)
+			if (err.response) {
+				console.warn('Register error', err.response.data.message)
+			}
+			router.push('/404')
 		}
 	}
+	const togglePasswordShown = () => {
+		setPasswordShown(prev => !prev)
+	}
 
+	const toggleConfirmPasswordShown = () => {
+		setConfirmPasswordShown(prev => !prev)
+	}
 	const handlePhoneNumberValue = (value: string) => {
 		setPhoneNumberValue(value)
 	}
@@ -167,9 +173,20 @@ const Signup = () => {
 									<div className='auth_input'>
 										<input
 											placeholder='Введите пароль'
-											type='text'
+											type={passwordShown ? 'text' : 'password'}
 											{...signupForm.register('password')}
 										/>
+										<div
+											onClick={togglePasswordShown}
+											className='auth_hidden-icon'
+										>
+											<Image
+												src={passwordShown ? AuthImg : hidenIcon}
+												alt='show password icon'
+												width={24}
+												height={24}
+											/>
+										</div>
 									</div>
 									<span className='auth_error'>
 										{signupForm.formState.errors.password &&
@@ -183,9 +200,20 @@ const Signup = () => {
 									<div className='auth_input'>
 										<input
 											placeholder='Повторите пароль'
-											type='text'
+											type={confirmPasswordShown ? 'text' : 'password'}
 											{...signupForm.register('confirmPassword')}
 										/>
+										<div
+											onClick={toggleConfirmPasswordShown}
+											className='auth_hidden-icon'
+										>
+											<Image
+												src={confirmPasswordShown ? AuthImg : hidenIcon}
+												alt='show password icon'
+												width={24}
+												height={24}
+											/>
+										</div>
 									</div>
 									<span className='auth_error'>
 										{signupForm.formState.errors.confirmPassword &&
