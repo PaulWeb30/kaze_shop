@@ -53,7 +53,7 @@ const Signup = () => {
 					Главная | <span>Регистрация</span>
 				</div>
 				<div className='auth_block'>
-					<div className='auth_image'>
+					<div className='auth_image none'>
 						<Image
 							src={AuthImg}
 							alt='link to user basket'
