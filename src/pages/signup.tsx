@@ -8,7 +8,8 @@ import { RegisterFormSchema } from '@/utils/validation'
 import Link from 'next/link'
 import Image from 'next/image'
 import AuthImg from '../assets/images/auth_photo.png'
-import hidenIcon from '../assets/icons/EyeClosed.svg'
+import hidenIcon from '../assets/icons/close_eye.svg'
+import showIcon from '../assets/icons/show_eye.svg'
 import { useRouter } from 'next/router'
 import { Api } from '@/services'
 
@@ -181,7 +182,7 @@ const Signup = () => {
 											className='auth_hidden-icon'
 										>
 											<Image
-												src={passwordShown ? AuthImg : hidenIcon}
+												src={passwordShown ? showIcon : hidenIcon}
 												alt='show password icon'
 												width={24}
 												height={24}
@@ -208,7 +209,7 @@ const Signup = () => {
 											className='auth_hidden-icon'
 										>
 											<Image
-												src={confirmPasswordShown ? AuthImg : hidenIcon}
+												src={confirmPasswordShown ? showIcon : hidenIcon}
 												alt='show password icon'
 												width={24}
 												height={24}
