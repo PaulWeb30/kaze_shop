@@ -23,11 +23,6 @@ const Login = () => {
 	const onSubmit = async (dto: LoginDto) => {
 		try {
 			const data = await Api().user.login(dto)
-			setCookie(null, 'token', data.accessToken, {
-				maxAge: 30 * 24 * 60 * 60,
-				path: '/',
-			})
-			dispatch(addUserInfo(data.user))
 		} catch (err) {
 			console.warn('Register error', err)
 			if (err.response) {
