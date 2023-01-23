@@ -9,6 +9,8 @@ import { LoginFormSchema } from '../utils/validation'
 import { addUserInfo } from '@/redux/slices/user'
 import { useAppDispatch } from '@/redux/hooks'
 import Image from 'next/image'
+import hidenIcon from '../assets/icons/close_eye.svg'
+import showIcon from '../assets/icons/show_eye.svg'
 import AuthImg from '../assets/images/auth_photo.png'
 import { Api } from '@/services'
 import { useRouter } from 'next/router'
@@ -16,10 +18,16 @@ const Login = () => {
 	const dispatch = useAppDispatch()
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
+	const [passwordShown, setPasswordShown] = useState(false)
+
 	const loginForm = useForm<LoginDto>({
 		mode: 'onChange',
 		resolver: yupResolver(LoginFormSchema),
 	})
+
+	const togglePasswordShown = () => {
+		setPasswordShown(prev => !prev)
+	}
 
 	const onSubmit = async (dto: LoginDto) => {
 		try {
@@ -83,9 +91,20 @@ const Login = () => {
 								<div className='auth_input'>
 									<input
 										placeholder='Введите пароль'
-										type='text'
+										type={passwordShown ? 'text' : 'password'}
 										{...loginForm.register('password')}
 									/>
+									<div
+										onClick={togglePasswordShown}
+										className='auth_hidden-icon'
+									>
+										<Image
+											src={passwordShown ? showIcon : hidenIcon}
+											alt='show password icon'
+											width={24}
+											height={24}
+										/>
+									</div>
 								</div>
 
 								<span className='auth_error'>
