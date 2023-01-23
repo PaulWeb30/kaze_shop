@@ -21,6 +21,11 @@ const Signup = () => {
 	})
 
 	const onSubmit = async (dto: CreateUserDto) => {
+		if (!phoneNumberValue.startsWith('38')) {
+			setPhoneNumberError('Incorrect number')
+		} else {
+			setPhoneNumberError('')
+		}
 		// try {
 		// 	await Api().user.registration(dto)
 		// } catch (err) {
@@ -33,7 +38,7 @@ const Signup = () => {
 
 		const data = {
 			...dto,
-			phoneNumber: '+' + phoneNumberValue,
+			phoneNumber: phoneNumberValue,
 		}
 		if (!phoneNumberError) {
 			console.log(data)
@@ -41,9 +46,6 @@ const Signup = () => {
 	}
 
 	const handlePhoneNumberValue = (value: string) => {
-		if (!phoneNumberValue.startsWith('38') && phoneNumberValue.length >= 13) {
-			setPhoneNumberError('Incorrect number')
-		}
 		setPhoneNumberValue(value)
 	}
 	return (
@@ -150,9 +152,8 @@ const Signup = () => {
 										dropdownClass={'auth_dropdown'}
 										placeholder='+38 (---) --- -- --'
 										inputProps={{
-											name: 'phone',
+											name: 'phoneNumber',
 											required: true,
-											autoFocus: true,
 										}}
 									/>
 									<span className='auth_error'>
