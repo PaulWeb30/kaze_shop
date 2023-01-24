@@ -16,8 +16,4 @@ export const UserApi = (instance: AxiosInstance) => ({
 		)
 		return data
 	},
-	async getMe() {
-		const { data } = await instance.patch('/auth/refresh')
-		return data
-	},
 })

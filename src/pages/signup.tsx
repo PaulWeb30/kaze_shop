@@ -6,6 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { CreateUserDto } from '@/types/auth'
 import { NotAuthorized } from '@/hoc/OnlyNotAuthorized'
 import { RegisterFormSchema } from '@/utils/validation'
+import { setCookie } from 'nookies'
+import { useAppDispatch } from '@/redux/hooks'
 import Link from 'next/link'
 import Image from 'next/image'
 import AuthImg from '../assets/images/auth_photo.png'
@@ -13,9 +15,11 @@ import hidenIcon from '../assets/icons/close_eye.svg'
 import showIcon from '../assets/icons/show_eye.svg'
 import { useRouter } from 'next/router'
 import { Api } from '@/services'
+import { addUserInfo } from '@/redux/slices/user'
 
 const Signup = () => {
 	const router = useRouter()
+	const dispatch = useAppDispatch()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [signUpLoading, setSignUpLoading] = useState<boolean>(false)
 	const [phoneNumberValue, setPhoneNumberValue] = useState<string>('')
@@ -39,7 +43,7 @@ const Signup = () => {
 	}
 
 	const onSubmit = async (dto: CreateUserDto) => {
-		const data = {
+		const registrationData = {
 			...dto,
 			phoneNumber: phoneNumberValue,
 		}
@@ -47,8 +51,14 @@ const Signup = () => {
 			if (!phoneNumberError) {
 				setPhoneNumberError('')
 				setSignUpLoading(true)
-				await Api().user.registration(data)
-				router.push('/login')
+				const data = await Api().user.registration(registrationData)
+
+				setCookie(null, 'token', data.accessToken, {
+					maxAge: 30 * 24 * 60 * 60,
+					path: '/',
+				})
+				dispatch(addUserInfo(data.user))
+				router.push('/cabinet')
 			}
 		} catch (err) {
 			setSignUpLoading(false)
