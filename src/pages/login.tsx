@@ -19,7 +19,7 @@ const Login = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [passwordShown, setPasswordShown] = useState(false)
-
+	const [loginLoading, setLoginLoading] = useState<boolean>(false)
 	const loginForm = useForm<LoginDto>({
 		mode: 'onChange',
 		resolver: yupResolver(LoginFormSchema),
@@ -31,6 +31,7 @@ const Login = () => {
 
 	const onSubmit = async (dto: LoginDto) => {
 		try {
+			setLoginLoading(true)
 			const data = await Api().user.login(dto)
 			setCookie(null, 'token', data.accessToken, {
 				maxAge: 30 * 24 * 60 * 60,
@@ -39,12 +40,14 @@ const Login = () => {
 			dispatch(addUserInfo(data.user))
 			router.push('/cabinet')
 		} catch (err) {
+			setLoginLoading(false)
 			console.warn('Register error', err)
 			if (err.response) {
 				console.warn('Register error after response', err.response.data.message)
 				setErrorMessage(err.response.data.message)
+			} else {
+				router.push('/404')
 			}
-			router.push('/404')
 		}
 	}
 
@@ -124,8 +127,12 @@ const Login = () => {
 							{errorMessage && (
 								<span className='auth_error'>{errorMessage}</span>
 							)}
-							<button className='auth_btn' type='submit'>
-								Войти
+							<button
+								className='auth_btn'
+								type='submit'
+								disabled={loginLoading}
+							>
+								{loginLoading ? 'Loading...' : 'Войти'}
 							</button>
 
 							<Link className='auth_link' href='/signup'>

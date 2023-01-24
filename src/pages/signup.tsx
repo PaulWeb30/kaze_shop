@@ -17,8 +17,10 @@ import { Api } from '@/services'
 const Signup = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
+	const [signUpLoading, setSignUpLoading] = useState<boolean>(false)
 	const [phoneNumberValue, setPhoneNumberValue] = useState<string>('')
-	const [phoneNumberError, setPhoneNumberError] = useState<string>('')
+	const [phoneNumberError, setPhoneNumberError] =
+		useState<string>('Incorrect number')
 	const [passwordShown, setPasswordShown] = useState(false)
 	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
 	const [privacyPolicyState, setPrivacyPolicyState] = useState<boolean>(false)
@@ -27,26 +29,36 @@ const Signup = () => {
 		resolver: yupResolver(RegisterFormSchema),
 	})
 
-	const onSubmit = async (dto: CreateUserDto) => {
-		if (!phoneNumberValue.startsWith('38')) {
+	const handlePhoneNumberValue = (value: string) => {
+		if (!phoneNumberValue.startsWith('38') || phoneNumberValue.length < 9) {
 			setPhoneNumberError('Incorrect number')
 		} else {
 			setPhoneNumberError('')
 		}
+		setPhoneNumberValue(value)
+	}
+
+	const onSubmit = async (dto: CreateUserDto) => {
 		const data = {
 			...dto,
 			phoneNumber: phoneNumberValue,
 		}
 		try {
-			await Api().user.registration(data)
-			router.push('/login')
+			if (!phoneNumberError) {
+				setPhoneNumberError('')
+				setSignUpLoading(true)
+				await Api().user.registration(data)
+				router.push('/login')
+			}
 		} catch (err) {
+			setSignUpLoading(false)
 			console.warn('Register error', err)
 			if (err.response) {
 				console.warn('Register error', err.response.data.message)
 				setErrorMessage(err.response.data.message)
+			} else {
+				router.push('/404')
 			}
-			router.push('/404')
 		}
 	}
 	const togglePasswordShown = () => {
@@ -56,9 +68,7 @@ const Signup = () => {
 	const toggleConfirmPasswordShown = () => {
 		setConfirmPasswordShown(prev => !prev)
 	}
-	const handlePhoneNumberValue = (value: string) => {
-		setPhoneNumberValue(value)
-	}
+
 	return (
 		<main className='content'>
 			<div className='container'>
@@ -225,11 +235,11 @@ const Signup = () => {
 								<span className='auth_error'>{errorMessage}</span>
 							)}
 							<button
-								disabled={!privacyPolicyState}
+								disabled={!privacyPolicyState || !!signUpLoading}
 								className='auth_btn wdth'
 								type='submit'
 							>
-								Зарегистрироваться
+								{signUpLoading ? 'Loading...' : 'Зарегистрироваться'}
 							</button>
 						</form>
 						<Link className='auth_link' href='/login'>
