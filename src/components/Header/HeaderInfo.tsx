@@ -4,8 +4,8 @@ import cl from './Header.module.scss'
 import shopingCartSVG from '../../assets/icons/ShoppingCart.svg'
 import accountSVG from '../../assets/icons/User.svg'
 import arrowSVG from '../../assets/icons/Arrow.svg'
-import { NextPage } from 'next'
-const HeaderInfo: NextPage<{ toggleBurgerFunc: () => void }> = ({
+import { FC } from 'react'
+const HeaderInfo: FC<{ toggleBurgerFunc: () => void }> = ({
 	toggleBurgerFunc,
 }) => {
 	return (

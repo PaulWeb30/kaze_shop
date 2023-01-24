@@ -1,6 +1,7 @@
 import cl from './Header.module.scss'
 import Link from 'next/link'
-const HeaderLogo = () => {
+import { FC } from 'react'
+const HeaderLogo:FC = () => {
 	return (
 		<Link href={'/'} className={cl.header__logo}>
 			Kaze Sport

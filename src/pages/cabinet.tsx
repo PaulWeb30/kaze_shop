@@ -1,27 +1,31 @@
 import React from 'react'
 import { withAuth } from '@/hoc/RequiredAuth'
-import axios from 'axios'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import user, { selectUserInfo } from '../redux/slices/user'
 import { NextPage } from 'next'
-interface Props {
-	todo: { id: number; title: string }
-}
-const Cabinet: NextPage<Props> = ({ todo }) => {
-	if (!todo) {
-		return <h1>loading</h1>
-	}
+
+const Cabinet: NextPage = () => {
+	const dispatch = useAppDispatch()
+	const userInfo = useAppSelector(selectUserInfo)
+
 	return (
 		<main className='content'>
-			<h1>{todo.title}</h1>
+			<div className='container'>
+				<div className='page_coordinator'>
+					Главная | <span>Личный кабинет</span>
+				</div>
+				<div className='cabinet_body'></div>
+				<h1>Users cabinet</h1>
+				{!userInfo || userInfo === null
+					? 'no info'
+					: 'this is' + userInfo.name + 'profile'}
+			</div>
 		</main>
 	)
 }
 
 export const getServerSideProps = withAuth(async context => {
-	const response = await axios.get(
-		'https://jsonplaceholder.typicode.com/todos/1'
-	)
-	const todo = await response.data
-	return { props: { todo } }
+	return { props: {} }
 })
 
 export default Cabinet
