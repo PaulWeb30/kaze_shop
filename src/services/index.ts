@@ -7,7 +7,7 @@ import { setCookie } from 'nookies'
 export type ApiReturnType = {
 	user: ReturnType<typeof UserApi>
 }
-export const API_URL = 'http://[::1]:7457/'
+export const API_URL = 'http://localhost:7457/kaze_shop'
 
 export const Api = (
 	ctx?: NextPageContext | GetServerSidePropsContext
@@ -18,7 +18,7 @@ export const Api = (
 	const instance = axios.create({
 		baseURL: API_URL,
 		headers: {
-			Authorization: 'Bearer ' + token,
+			// Authorization: 'Bearer ' + token,
 		},
 	})
 	instance.interceptors.response.use(

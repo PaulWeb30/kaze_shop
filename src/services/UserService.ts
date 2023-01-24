@@ -10,14 +10,14 @@ export const UserApi = (instance: AxiosInstance) => ({
 		return data
 	},
 	async registration(dto: CreateUserDto) {
-		const { data } = await instance.post<LoginDto, { data: AuthResponse }>(
+		const { data } = await instance.put<LoginDto, { data: AuthResponse }>(
 			'/auth/signup',
 			dto
 		)
 		return data
 	},
 	async getMe() {
-		const { data } = await instance.get('/auth/refresh')
+		const { data } = await instance.patch('/auth/refresh')
 		return data
 	},
 })
