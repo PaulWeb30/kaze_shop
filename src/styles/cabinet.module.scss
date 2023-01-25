@@ -1,7 +1,7 @@
 .cabinet {
 	&_tabs {
 		float: left;
-		width: 280px;
+		width: auto;
 		display: flex;
 		flex-direction: column;
 	}
@@ -20,29 +20,44 @@
 		outline: none;
 		transition: 0.4s linear background-color;
 		cursor: pointer;
-		// &::before {
-		// 	content: '';
-		// 	position: absolute;
-		// 	top: 50%;
-		// 	background-image: url('../assets/icons/BookmarkSimple.svg');
-		// 	transform: translateY(-50%);
-		// 	left: 10%;
-		// 	width: 24px;
-		// 	height: 24px;
-		// }
 		&:hover {
 			background: #0b0b0b;
 			color: #fff;
 			transition: 0.4s linear background-color;
 		}
-		span {
+	}
+	&_icon {
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+		background-size: cover;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 6%;
+		&_pencil {
+			background-image: url('../assets/icons/NotePencil.svg');
+		}
+		&_change {
+			background-image: url('../assets/icons/LockKey.svg');
+		}
+		&_history {
+			background-image: url('../assets/icons/Receipt.svg');
+		}
+		&_bookmarks {
 			background-image: url('../assets/icons/BookmarkSimple.svg');
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			left: 10%;
+		}
+		&_baskets {
+			background-image: url('../assets/icons/ShoppingCartCab.svg');
+		}
+		&_eye {
+			background-image: url('../assets/icons/Eye.svg');
+		}
+		&_logout {
+			background-image: url('../assets/icons/UploadSimple.svg');
 		}
 	}
+
 	&_tablink_active {
 		display: block;
 		padding: 18px 54px;
@@ -63,5 +78,11 @@
 		padding: 0px 12px;
 		width: 70%;
 		height: 400px;
+	}
+
+	// ICONS ON HOVER
+
+	&_tablink:hover &_icon_pencil {
+		background-image: url('../assets/icons/Arrow.svg');
 	}
 }

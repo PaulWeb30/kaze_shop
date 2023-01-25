@@ -21,14 +21,46 @@ const Cabinet: NextPage = () => {
 				</div>
 				<div className={cl.cabinet_tabs}>
 					<button className={cl.cabinet_tablink}>
-						<span></span>Изменить данные
-					</button>
-					<button className={cl.cabinet_tablink}>
-						<span></span>
+						<span
+							className={`${cl.cabinet_icon} ${cl.cabinet_icon_pencil}`}
+						></span>
 						Изменить данные
 					</button>
 					<button className={cl.cabinet_tablink}>
-						<span></span>Second tab
+						<span
+							className={`${cl.cabinet_icon} ${cl.cabinet_icon_change}`}
+						></span>
+						Изменить пароль
+					</button>
+					<button className={cl.cabinet_tablink}>
+						<span
+							className={`${cl.cabinet_icon} ${cl.cabinet_icon_history}`}
+						></span>
+						История заказов
+					</button>
+					<button className={cl.cabinet_tablink}>
+						<span
+							className={`${cl.cabinet_icon} ${cl.cabinet_icon_bookmarks}`}
+						></span>
+						Закладки
+					</button>
+					<button className={cl.cabinet_tablink}>
+						<span
+							className={`${cl.cabinet_icon} ${cl.cabinet_icon_baskets}`}
+						></span>
+						Собранные корзины
+					</button>
+					<button className={cl.cabinet_tablink}>
+						<span
+							className={`${cl.cabinet_icon} ${cl.cabinet_icon_eye}`}
+						></span>
+						Вы смотрели раньше
+					</button>
+					<button className={cl.cabinet_tablink}>
+						<span
+							className={`${cl.cabinet_icon} ${cl.cabinet_icon_logout}`}
+						></span>
+						Выход
 					</button>
 				</div>
 				<div className={cl.cabinet_tabcontent}>
