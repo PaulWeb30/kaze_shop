@@ -31,6 +31,7 @@ body {
 	text-rendering: optimizeSpeed;
 	line-height: 1.5;
 	box-sizing: border-box;
+	background: #f2f2f0;
 }
 
 main {
@@ -45,7 +46,6 @@ a[class] {
 button[class] {
 	cursor: pointer;
 	outline: none;
-	border: none;
 }
 
 input,
