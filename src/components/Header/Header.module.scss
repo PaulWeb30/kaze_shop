@@ -1,5 +1,8 @@
 .header {
-	position: fixed;
+	position: absolute;
+	@media (max-width: 840px) {
+		position: fixed;
+	}
 	width: 100%;
 	top: 0;
 	left: 0;
@@ -24,7 +27,6 @@
 		align-items: center;
 	}
 	&__menu {
-		
 		@media (max-width: 840px) {
 			position: fixed;
 			left: -300%;
@@ -95,7 +97,6 @@
 				margin: 0px 0px 0px 10px;
 			}
 			@media (max-width: 840px) {
-				
 				margin: 0;
 				padding: 16px 0px 16px 24px;
 				border-bottom: 1.5px solid #9d9d9d;
@@ -104,6 +105,16 @@
 					position: absolute;
 					content: url('../../assets/icons/headerArrow.svg');
 					right: 4%;
+				}
+				&:hover {
+					border: none;
+					background-color: #0b0b0b;
+					&::after {
+						content: url('../../assets/icons/CaretDownWhite.svg');
+					}
+					a {
+						color: #fff;
+					}
 				}
 			}
 		}
@@ -120,6 +131,13 @@
 				transform: translateY(-50%);
 				margin-right: 10px;
 				padding-right: 10px;
+			}
+			&:hover {
+				border: none;
+				background-color: #0b0b0b;
+				a {
+					color: #fff;
+				}
 			}
 			@media (max-width: 400px) {
 				display: block;
@@ -219,7 +237,13 @@
 		cursor: pointer;
 		display: flex;
 		align-items: center;
+		position: relative;
+		// background: #f2f2f0;
+		// border: 1.5px solid #9d9d9d;
+		// padding: 5px;
+		// padding: 14px 20px 14px 20px;
 		span {
+			display: inline-block;
 			font-family: 'Georama', sans-serif;
 			font-style: normal;
 			margin-right: 5px;
@@ -227,9 +251,15 @@
 			font-weight: 500;
 			line-height: 22px;
 			color: #0b0b0b;
-			// @media (max-width: 1000px) {
-			// 	font-size: 16px;
-			// }
+		}
+		&_dropdown {
+			position: absolute;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			top: 100%;
+			left: 5%;
 		}
 		@media (max-width: 428px) {
 			display: none;

@@ -18,6 +18,11 @@ const HeaderInfo: FC<{ toggleBurgerFunc: () => void }> = ({
 					width={18}
 					height={18}
 				/>
+				{/* <div className={cl.header__language_dropdown}>
+					<span>УКР</span>
+					<span>УКР</span>
+					<span>УКР</span>
+				</div> */}
 			</div>
 			<Link href={'/cart'}>
 				<Image

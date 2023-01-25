@@ -20,6 +20,10 @@
 		outline: none;
 		transition: 0.4s linear background-color;
 		cursor: pointer;
+		border-bottom: 0px;
+		&:last-child {
+			border-bottom: 1.5px solid #9d9d9d;
+		}
 		&:hover {
 			background: #0b0b0b;
 			color: #fff;
@@ -75,7 +79,7 @@
 	}
 	&_tabcontent {
 		float: left;
-		padding: 0px 12px;
+		padding: 0px 20px;
 		width: 70%;
 		height: 400px;
 	}
@@ -83,6 +87,6 @@
 	// ICONS ON HOVER
 
 	&_tablink:hover &_icon_pencil {
-		background-image: url('../assets/icons/Arrow.svg');
+		background-image: url('../assets/icons/NotePencil.svg');
 	}
 }

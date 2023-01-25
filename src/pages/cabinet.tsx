@@ -76,10 +76,6 @@ const Cabinet: NextPage = () => {
 						ut diam. Fusce iaculis auctor purus.
 					</p>
 				</div>
-				<h1>Users cabinet</h1>
-				{!userInfo || userInfo === null
-					? 'no info'
-					: 'this is' + userInfo.name + 'profile'}
 			</div>
 		</main>
 	)
