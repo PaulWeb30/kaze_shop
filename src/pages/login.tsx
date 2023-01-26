@@ -13,6 +13,7 @@ import hidenIcon from '../assets/icons/close_eye.svg'
 import showIcon from '../assets/icons/show_eye.svg'
 import AuthImg from '../assets/images/auth_photo.png'
 import { Api } from '@/services'
+import SpinnerLayout from '@/layouts/SpinnerLayout'
 import { useRouter } from 'next/router'
 const Login = () => {
 	const dispatch = useAppDispatch()
@@ -52,97 +53,99 @@ const Login = () => {
 	}
 
 	return (
-		<main className='content'>
-			<div className='container'>
-				<div className='page_coordinator'>
-					Главная | <span>Вход</span>
-				</div>
-				<div className='auth_block'>
-					<div className='auth_image'>
-						<Image
-							src={AuthImg}
-							alt='link to user basket'
-							width={390}
-							height={550}
-							quality={90}
-							priority={true}
-						/>
+		<SpinnerLayout>
+			<main className='content'>
+				<div className='container'>
+					<div className='page_coordinator'>
+						Главная | <span>Вход</span>
 					</div>
-					<div className='auth_form'>
-						<h3 className='auth_title'>Вход</h3>
-						<form onSubmit={loginForm.handleSubmit(onSubmit)}>
-							<div className='auth_field'>
-								<label className='auth_label' htmlFor='email'>
-									E-mail
-								</label>
-								<div className='auth_input'>
-									<input
-										placeholder='Введите e-mail'
-										type='text'
-										{...loginForm.register('email')}
-									/>
-								</div>
-								<span className='auth_error'>
-									{loginForm.formState.errors.email &&
-										loginForm.formState.errors.email.message}
-								</span>
-							</div>
-							<div className='auth_field'>
-								<label className='auth_label' htmlFor='email'>
-									Пароль
-								</label>
-								<div className='auth_input'>
-									<input
-										placeholder='Введите пароль'
-										type={passwordShown ? 'text' : 'password'}
-										{...loginForm.register('password')}
-									/>
-									<div
-										onClick={togglePasswordShown}
-										className='auth_hidden-icon'
-									>
-										<Image
-											src={passwordShown ? showIcon : hidenIcon}
-											alt='show password icon'
-											width={24}
-											height={24}
+					<div className='auth_block'>
+						<div className='auth_image'>
+							<Image
+								src={AuthImg}
+								alt='link to user basket'
+								width={390}
+								height={550}
+								quality={90}
+								priority={true}
+							/>
+						</div>
+						<div className='auth_form'>
+							<h3 className='auth_title'>Вход</h3>
+							<form onSubmit={loginForm.handleSubmit(onSubmit)}>
+								<div className='auth_field'>
+									<label className='auth_label' htmlFor='email'>
+										E-mail
+									</label>
+									<div className='auth_input'>
+										<input
+											placeholder='Введите e-mail'
+											type='text'
+											{...loginForm.register('email')}
 										/>
 									</div>
+									<span className='auth_error'>
+										{loginForm.formState.errors.email &&
+											loginForm.formState.errors.email.message}
+									</span>
 								</div>
+								<div className='auth_field'>
+									<label className='auth_label' htmlFor='email'>
+										Пароль
+									</label>
+									<div className='auth_input'>
+										<input
+											placeholder='Введите пароль'
+											type={passwordShown ? 'text' : 'password'}
+											{...loginForm.register('password')}
+										/>
+										<div
+											onClick={togglePasswordShown}
+											className='auth_hidden-icon'
+										>
+											<Image
+												src={passwordShown ? showIcon : hidenIcon}
+												alt='show password icon'
+												width={24}
+												height={24}
+											/>
+										</div>
+									</div>
 
-								<span className='auth_error'>
-									{loginForm.formState.errors.password &&
-										loginForm.formState.errors.password.message}
-								</span>
-							</div>
-							<div className='auth_detail'>
-								<div className='auth_checkbox'>
-									<input type='checkbox' />
-									<span>Запомнить меня</span>
+									<span className='auth_error'>
+										{loginForm.formState.errors.password &&
+											loginForm.formState.errors.password.message}
+									</span>
 								</div>
-								<Link href={'#'} className='auth_detail_link'>
-									Забыл пароль
+								<div className='auth_detail'>
+									<div className='auth_checkbox'>
+										<input type='checkbox' />
+										<span>Запомнить меня</span>
+									</div>
+									<Link href={'#'} className='auth_detail_link'>
+										Забыл пароль
+									</Link>
+								</div>
+								{errorMessage && (
+									<span className='auth_error'>{errorMessage}</span>
+								)}
+								<button
+									className='auth_btn'
+									type='submit'
+									disabled={loginLoading}
+								>
+									{loginLoading ? 'Loading...' : 'Войти'}
+								</button>
+
+								<Link className='auth_link' href='/signup'>
+									Все еще нет аккаунта? <span>Зарегистрироваться</span>
 								</Link>
-							</div>
-							{errorMessage && (
-								<span className='auth_error'>{errorMessage}</span>
-							)}
-							<button
-								className='auth_btn'
-								type='submit'
-								disabled={loginLoading}
-							>
-								{loginLoading ? 'Loading...' : 'Войти'}
-							</button>
-
-							<Link className='auth_link' href='/signup'>
-								Все еще нет аккаунта? <span>Зарегистрироваться</span>
-							</Link>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+		</SpinnerLayout>
 	)
 }
 

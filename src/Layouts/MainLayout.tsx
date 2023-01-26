@@ -1,15 +1,13 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
+import { Russo_One } from '@next/font/google'
 import Footer from '../components/Footer/Footer'
-import Spinner from '@/components/Spinner/Spinner'
 import Header from '../components/Header/Header'
 import Head from 'next/head'
+const RussoOne = Russo_One({
+	weight: '400',
+	subsets: ['latin', 'cyrillic'],
+})
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
-	const [spinnerShow, setSpinnerShow] = useState<boolean>(true)
-	React.useEffect(() => {
-		setTimeout(() => {
-			setSpinnerShow(false)
-		}, 1333333333333333500)
-	}, [])
 	return (
 		<>
 			<Head>
@@ -28,15 +26,12 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
 					rel='stylesheet'
 				></link>
 			</Head>
-			{spinnerShow ? (
-				<Spinner />
-			) : (
-				<div className='wrapper'>
-					<Header />
-					{children}
-					{/* <Footer /> */}
-				</div>
-			)}
+			{/* <main className={RussoOne.className}></main> */}
+			<div className='wrapper'>
+				<Header />
+				{children}
+				{/* <Footer /> */}
+			</div>
 		</>
 	)
 }

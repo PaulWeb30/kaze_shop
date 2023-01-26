@@ -4,12 +4,15 @@ import type { AppProps } from 'next/app'
 import Layout from '@/layouts/MainLayout'
 import { wrapper } from '../redux/store'
 import { Api } from '@/services'
-
+import { Suspense } from 'react'
+import Spinner from '@/components/Spinner/Spinner'
 function App({ Component, pageProps }: AppProps) {
 	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
+		<Suspense fallback={<Spinner />}>
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
+		</Suspense>
 	)
 }
 
@@ -25,11 +28,11 @@ function App({ Component, pageProps }: AppProps) {
 // 					})
 // 					ctx.res.end()
 // 				} else  {
-					
+
 // 					ctx.res.writeHead(302, {
 // 						Location: '/404',
 // 					})
-					
+
 // 					ctx.res.end()
 // 				}
 // 				console.log(err)
