@@ -8,7 +8,7 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
 	React.useEffect(() => {
 		setTimeout(() => {
 			setSpinnerShow(false)
-		}, 1500)
+		}, 1333333333333333500)
 	}, [])
 	return (
 		<>

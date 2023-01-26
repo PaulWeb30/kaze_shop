@@ -6,12 +6,19 @@
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-  z-index: 1000000000;
+	z-index: 1000000000;
 }
 .waviy {
 	position: relative;
+	display: flex;
 	-webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
 	font-size: 60px;
+	text-align: center;
+	@media (max-width: 450px) {
+		font-size: 35px;
+		justify-content: center;
+		flex: 1 1 20%;
+	}
 }
 .waviy span {
 	font-family: 'Alfa Slab One', cursive;

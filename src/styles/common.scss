@@ -21,9 +21,11 @@
 	line-height: 22px;
 	color: #9d9d9d;
 	margin-bottom: 50px;
+	overflow-x: auto;
 
-	span {
+	a {
 		color: #0b0b0b;
+		text-decoration: none;
 	}
 }
 
@@ -88,6 +90,7 @@
 			width: 95%;
 			border: none;
 			outline: none;
+			background: transparent;
 		}
 
 		input:-webkit-autofill {

@@ -13,55 +13,53 @@ const Cabinet: NextPage = () => {
 		<main className='content'>
 			<div className='container'>
 				<div className='page_coordinator'>
-					Главная | <span>Личный кабинет</span>
+					Главная | <Link href='#'>Личный кабинет</Link>
 				</div>
 				<div className={cl.cabinet_tabs}>
-					<Link href='/'>
-						<button className={cl.cabinet_tablink}>
-							<span
-								className={`${cl.cabinet_icon} ${cl.cabinet_icon_pencil}`}
-							></span>
-							Изменить данные
-						</button>
+					<Link href='#' className={cl.cabinet_tablink}>
+						<span
+							className={`${cl.cabinet_icon} ${cl.cabinet_icon_pencil}`}
+						></span>
+						Изменить данные
 					</Link>
-					<button className={cl.cabinet_tablink}>
+					<Link href='#' className={cl.cabinet_tablink}>
 						<span
 							className={`${cl.cabinet_icon} ${cl.cabinet_icon_change}`}
 						></span>
 						Изменить пароль
-					</button>
-					<button className={cl.cabinet_tablink}>
+					</Link>
+					<Link href='#' className={cl.cabinet_tablink}>
 						<span
 							className={`${cl.cabinet_icon} ${cl.cabinet_icon_history}`}
 						></span>
 						История заказов
-					</button>
-					<button className={cl.cabinet_tablink}>
+					</Link>
+					<Link href='#' className={cl.cabinet_tablink}>
 						<span
 							className={`${cl.cabinet_icon} ${cl.cabinet_icon_bookmarks}`}
 						></span>
 						Закладки
-					</button>
-					<button className={cl.cabinet_tablink}>
+					</Link>
+					<Link href='#' className={cl.cabinet_tablink}>
 						<span
 							className={`${cl.cabinet_icon} ${cl.cabinet_icon_baskets}`}
 						></span>
 						Собранные корзины
-					</button>
-					<button className={cl.cabinet_tablink}>
+					</Link>
+					<Link href='#' className={cl.cabinet_tablink}>
 						<span
 							className={`${cl.cabinet_icon} ${cl.cabinet_icon_eye}`}
 						></span>
 						Вы смотрели раньше
-					</button>
-					<button className={cl.cabinet_tablink}>
+					</Link>
+					<Link href='#' className={cl.cabinet_tablink}>
 						<span
 							className={`${cl.cabinet_icon} ${cl.cabinet_icon_logout}`}
 						></span>
 						Выход
-					</button>
+					</Link>
 				</div>
-				<div className={cl.cabinet_tabcontent}>
+				{/* <div className={cl.cabinet_tabcontent}>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
 						dignissim maximus enim, nec dictum diam pellentesque nec. Nulla
@@ -73,7 +71,7 @@ const Cabinet: NextPage = () => {
 						congue dignissim. Aliquam congue velit at tortor consequat cursus ut
 						ut diam. Fusce iaculis auctor purus.
 					</p>
-				</div>
+				</div> */}
 			</div>
 		</main>
 	)

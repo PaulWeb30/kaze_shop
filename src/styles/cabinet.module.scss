@@ -92,6 +92,18 @@
 	&_tablink:hover &_icon_change {
 		background-image: url('../assets/icons/cabinetTabs/whiteIcons/LockKey.svg');
 	}
+	&_tablink:hover &_icon_history {
+		background-image: url('../assets/icons/cabinetTabs/whiteIcons/Receipt.svg');
+	}
+	&_tablink:hover &_icon_baskets {
+		background-image: url('../assets/icons/cabinetTabs/whiteIcons/ShoppingCart.svg');
+	}
+	&_tablink:hover &_icon_eye {
+		background-image: url('../assets/icons/cabinetTabs/whiteIcons/Eye.svg');
+	}
+	&_tablink:hover &_icon_logout {
+		background-image: url('../assets/icons/cabinetTabs/whiteIcons/UploadSimple.svg');
+	}
 	&_tablink:hover &_icon_bookmarks {
 		background-image: url('../assets/icons/cabinetTabs/whiteIcons/BookmarkSimple.svg');
 	}
