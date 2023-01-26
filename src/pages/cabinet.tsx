@@ -3,11 +3,7 @@ import { withAuth } from '@/hoc/RequiredAuth'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { selectUserInfo } from '../redux/slices/user'
 import { NextPage } from 'next'
-import Image from 'next/image'
-import noteSvg from '../assets/icons/NotePencil.svg'
-import lockSvg from '../assets/icons/LockKey.svg'
-import receiptSvg from '../assets/icons/Receipt.svg'
-import markedSvg from '../assets/icons/BookmarkSimple.svg'
+import Link from 'next/link'
 import cl from '../styles/cabinet.module.scss'
 const Cabinet: NextPage = () => {
 	const dispatch = useAppDispatch()
@@ -20,12 +16,14 @@ const Cabinet: NextPage = () => {
 					Главная | <span>Личный кабинет</span>
 				</div>
 				<div className={cl.cabinet_tabs}>
-					<button className={cl.cabinet_tablink}>
-						<span
-							className={`${cl.cabinet_icon} ${cl.cabinet_icon_pencil}`}
-						></span>
-						Изменить данные
-					</button>
+					<Link href='/'>
+						<button className={cl.cabinet_tablink}>
+							<span
+								className={`${cl.cabinet_icon} ${cl.cabinet_icon_pencil}`}
+							></span>
+							Изменить данные
+						</button>
+					</Link>
 					<button className={cl.cabinet_tablink}>
 						<span
 							className={`${cl.cabinet_icon} ${cl.cabinet_icon_change}`}
