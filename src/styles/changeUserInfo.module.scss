@@ -1,0 +1,13 @@
+.changeInfo_form {
+	display: flex;
+	flex-direction: column;
+	form {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 50px;
+		flex: 1 1 50%;
+	}
+	button {
+		height: 56px;
+	}
+}

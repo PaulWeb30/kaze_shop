@@ -20,17 +20,47 @@ export const LoginFormSchema = yup.object().shape({
 export const RegisterFormSchema = yup
 	.object()
 	.shape({
-		name: yup.string().required('Name required').min(2, 'Minimum 2 symbols'),
+		name: yup
+			.string()
+			.required('Name required')
+			.min(2, 'Minimum 2 symbols')
+			.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
 		surname: yup
 			.string()
 			.required('Surname required')
-			.min(2, 'Minimum 2 symbols'),
-		// phoneNumber: yup
-		// 	.string()
-		// 	.required('Number required')
-		// 	.min(9, 'Incorrect number'),
+			.min(2, 'Minimum 2 symbols')
+			.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
+
 		confirmPassword: yup
 			.string()
 			.oneOf([yup.ref('password'), null], 'Passwords must match'),
 	})
 	.concat(LoginFormSchema)
+
+export const ChangeUserInfoShema = yup.object().shape({
+	name: yup
+		.string()
+		.required('Name required')
+		.min(2, 'Minimum 2 symbols')
+		.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
+	surname: yup
+		.string()
+		.required('Surname required')
+		.min(2, 'Minimum 2 symbols')
+		.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
+	country: yup
+		.string()
+		.required('Country required')
+		.min(2, 'Minimum 2 symbols')
+		.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
+	city: yup
+		.string()
+		.required('City required')
+		.min(2, 'Minimum 2 symbols')
+		.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
+	post_office: yup
+		.string()
+		.required('Post office required')
+		.min(2, 'Minimum 2 symbols')
+		.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
+})

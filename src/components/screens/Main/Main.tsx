@@ -1,5 +1,5 @@
 import React from 'react'
-
+import c from './Main.module.scss'
 const Main = () => {
 	return (
 		<main className='content'>

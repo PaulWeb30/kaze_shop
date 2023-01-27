@@ -25,3 +25,11 @@ export type AuthResponse = {
 	accessToken: string
 	user: User
 }
+
+export type ChangeUserInfoDto = {
+	name: string
+	surname: string
+	city: string
+	country: string
+	post_office: string
+}
