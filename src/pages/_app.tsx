@@ -1,5 +1,6 @@
 import '@/styles/reset.scss'
 import '@/styles/common.scss'
+import '@/styles/tabs.css'
 import type { AppProps } from 'next/app'
 import Layout from '@/layouts/MainLayout'
 import { wrapper } from '../redux/store'
