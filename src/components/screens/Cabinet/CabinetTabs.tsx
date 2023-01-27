@@ -1,13 +1,36 @@
 import React, { FC } from 'react'
 import cl from '../../../styles/cabinet.module.scss'
 import Link from 'next/link'
-const CabinetTabs: FC = () => {
+const CabinetTabs: FC<{
+	toggleTab: React.MouseEventHandler<HTMLButtonElement>
+}> = ({ toggleTab }) => {
 	return (
 		<div className={cl.cabinet_tabs}>
-			<Link href='/change_data' className={cl.cabinet_tablink}>
-				<span className={`${cl.cabinet_icon} ${cl.cabinet_icon_pencil}`}></span>
-				Изменить данные
-			</Link>
+			
+				<button
+					data-tabindex={1}
+					onClick={toggleTab}
+					className={cl.cabinet_tablink}
+				>
+					<span
+						className={`${cl.cabinet_icon} ${cl.cabinet_icon_pencil}`}
+					></span>
+					Изменить данные
+				</button>
+				{/* <div className='auth_field'>
+					<label className='auth_label' htmlFor='email'>
+						E-mail
+					</label>
+					<div className='auth_input'>
+						<input
+							placeholder='Введите e-mail'
+							type='text'
+							
+						/>
+					</div>
+					
+				</div> */}
+			
 			<Link href='#' className={cl.cabinet_tablink}>
 				<span className={`${cl.cabinet_icon} ${cl.cabinet_icon_change}`}></span>
 				Изменить пароль
