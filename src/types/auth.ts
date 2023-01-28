@@ -31,7 +31,7 @@ export type ChangeUserInfoDto = {
 	surname: string
 	city: string
 	country: string
-	post_office: string
+	postOffice: string
 }
 
 export type ChangeUserPasswordDto = {

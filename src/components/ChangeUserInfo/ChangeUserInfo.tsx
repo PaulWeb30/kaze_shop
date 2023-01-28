@@ -90,12 +90,12 @@ const ChangeUserInfo = () => {
 					<input
 						placeholder='Введите отделение'
 						type='text'
-						{...changeUserInfoForm.register('post_office')}
+						{...changeUserInfoForm.register('postOffice')}
 					/>
 				</div>
 				<span className='auth_error'>
-					{changeUserInfoForm.formState.errors.post_office &&
-						changeUserInfoForm.formState.errors.post_office.message}
+					{changeUserInfoForm.formState.errors.postOffice &&
+						changeUserInfoForm.formState.errors.postOffice.message}
 				</span>
 			</div>
 

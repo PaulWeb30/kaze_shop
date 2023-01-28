@@ -54,7 +54,7 @@ export const ChangeUserInfoShema = yup.object().shape({
 		.required('City required')
 		.min(2, 'Minimum 2 symbols')
 		.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
-	post_office: yup
+	postOffice: yup
 		.string()
 		.required('Post office required')
 		.min(2, 'Minimum 2 symbols')

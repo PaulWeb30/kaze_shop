@@ -3,7 +3,7 @@ import cl from '../../../styles/cabinet.module.scss'
 import ChangeUserInfo from '@/components/ChangeUserInfo/ChangeUserInfo'
 import ChangeUserPassword from '@/components/ChangeUserPassword/ChangeUserPassword'
 const CabinetTabs: FC = () => {
-	const [selectedTab, setSelectedTab] = React.useState<number | null>(0)
+	const [selectedTab, setSelectedTab] = React.useState<number | null>(1)
 
 	const toggleTab = React.useCallback(
 		(e: React.MouseEvent<HTMLButtonElement>) => {
