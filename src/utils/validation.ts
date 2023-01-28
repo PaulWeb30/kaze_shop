@@ -38,11 +38,7 @@ export const RegisterFormSchema = yup
 	.concat(LoginFormSchema)
 
 export const ChangeUserInfoShema = yup.object().shape({
-	name: yup
-		.string()
-		.required('Name required')
-		.min(2, 'Minimum 2 symbols')
-		.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
+	name: yup.string().required('Name required').min(2, 'Minimum 2 symbols'),
 	surname: yup
 		.string()
 		.required('Surname required')
