@@ -13,7 +13,7 @@
 		position: relative;
 	}
 	&_tab_active {
-		position: relative;
+		// position: relative;
 		flex-direction: column;
 	}
 	&_tabcontent {
@@ -37,10 +37,12 @@
 		@media (max-width: 700px) {
 			position: static;
 			justify-content: center;
-			width: 100vw;
+			width: 97vw;
+			margin-top: 20px;
 		}
 	}
 	&_tablink {
+		position: relative;
 		color: #9d9d9d;
 		border-top: 1.5px solid #9d9d9d;
 		border-bottom: 1.5px solid #9d9d9d;
@@ -94,7 +96,7 @@
 		color: #ffffff;
 		padding: 16px 0;
 		margin-bottom: 50px;
-		@media(max-width: 700px) {
+		@media (max-width: 700px) {
 			margin-bottom: 20px;
 		}
 	}
@@ -120,14 +122,10 @@
 		height: 24px;
 		background-size: cover;
 		position: absolute;
+		left: 7%;
 		top: 50%;
 		transform: translateY(-50%);
-		left: 6%;
-		@media (max-width: 700px) {
-			position: relative;
-			left: -7%;
-			top: 15px;
-		}
+
 		&_pencil {
 			background-image: url('../assets/icons/cabinetTabs/NotePencil.svg');
 		}

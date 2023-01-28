@@ -13,9 +13,10 @@ const CabinetTabs: FC = () => {
 			console.log(e.target)
 			const tabNumber = tabIndex || 1
 			setSelectedTab(+tabNumber)
-			const elX = e.screenX
+			const elX = e.clientX
 			const elY = e.screenY
-			window.scroll(elX, elY)
+			console.log(elX)
+			window.scrollTo({ top: elX / 10, behavior: 'smooth' })
 		},
 		[selectedTab]
 	)
