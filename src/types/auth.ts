@@ -33,3 +33,8 @@ export type ChangeUserInfoDto = {
 	country: string
 	post_office: string
 }
+
+export type ChangeUserPasswordDto = {
+	password: string
+	confirmPassword: string
+}

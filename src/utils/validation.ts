@@ -60,3 +60,16 @@ export const ChangeUserInfoShema = yup.object().shape({
 		.min(2, 'Minimum 2 symbols')
 		.matches(/(^|\s)[a-zA-Z]+(\s|$)/, 'Use only words'),
 })
+
+export const ChangeUserPasswordShema = yup.object().shape({
+	password: yup
+		.string()
+		.required('Пароль обязательный')
+		.matches(
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+			'Пароль должен содержать не менее 8 символов, один в верхнем регистре, один в нижнем регистре, одну цифру и один специальный регистр'
+		),
+	confirmPassword: yup
+		.string()
+		.oneOf([yup.ref('password'), null], 'Passwords must match'),
+})

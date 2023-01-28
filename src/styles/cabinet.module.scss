@@ -15,17 +15,21 @@
 		display: flex;
 		width: 48vw;
 		gap: 30px;
-		// div {
-		// 	flex: 1 1 33.3%;
-		// 	&:nth-child(5) {
-		// 		flex: 1 1 100%;
-		// 	}
-		// }
+		@media (max-width: 450px) {
+			left: 0;
+			flex-direction: column;
+			gap: 5px;
+			width: 100%;
+			top: 100%;
+		}
 	}
 	&_tablink {
 		position: relative;
 		color: #9d9d9d;
-		border: 1.5px solid #9d9d9d;
+		border-top: 1.5px solid #9d9d9d;
+		border-bottom: 1.5px solid #9d9d9d;
+		border-left: 1.5px solid #9d9d9d;
+		border-right: 1.5px solid #9d9d9d;
 		display: block;
 		padding: 18px 54px;
 		text-align: center;
@@ -38,7 +42,7 @@
 		transition: 0.4s linear background-color;
 		cursor: pointer;
 		width: 100%;
-		
+
 		&:hover {
 			background: #0b0b0b;
 			color: #fff;
