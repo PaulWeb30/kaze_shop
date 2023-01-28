@@ -4,6 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { ChangeUserInfoDto } from '@/types/auth'
 import { ChangeUserInfoShema } from '@/utils/validation'
 import cl from '../../styles/cabinet.module.scss'
+import { Api } from '@/services'
+import { destroyCookie } from 'nookies'
+import { useAppDispatch } from '@/redux/hooks'
 const ChangeUserInfo = () => {
 	const changeUserInfoForm = useForm<ChangeUserInfoDto>({
 		mode: 'onChange',
@@ -12,6 +15,22 @@ const ChangeUserInfo = () => {
 
 	const onSubmit = async (dto: ChangeUserInfoDto) => {
 		console.log(dto)
+		try {
+			// setLoginLoading(true)
+			const data = await Api().user.changeInfo(dto)
+			destroyCookie(null, 'accessToken')
+			// dispatch(addUserInfo(data.user))
+			// router.push('/cabinet')
+		} catch (err) {
+			// setLoginLoading(false)
+			console.warn('Register error', err)
+			if (err.response) {
+				console.warn('Register error after response', err.response.data.message)
+				// setErrorMessage(err.response.data.message)
+			} else {
+				// router.push('/404')
+			}
+		}
 	}
 	return (
 		<form

@@ -18,7 +18,7 @@ export const Api = (
 	const instance = axios.create({
 		baseURL: API_URL,
 		headers: {
-			// Authorization: 'Bearer ' + token,
+			Authorization: 'Bearer ' + token,
 		},
 	})
 	instance.interceptors.response.use(
