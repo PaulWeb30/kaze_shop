@@ -2,12 +2,28 @@ import React, { FC } from 'react'
 import cl from '../../../styles/cabinet.module.scss'
 import ChangeUserInfo from '@/components/ChangeUserInfo/ChangeUserInfo'
 import ChangeUserPassword from '@/components/ChangeUserPassword/ChangeUserPassword'
-const CabinetTabs: FC<{
-	toggleTab: React.MouseEventHandler<HTMLButtonElement>
-}> = ({ toggleTab }) => {
+const CabinetTabs: FC = () => {
+	const [selectedTab, setSelectedTab] = React.useState<number | null>(0)
+
+	const toggleTab = React.useCallback(
+		(e: React.MouseEvent<HTMLButtonElement>) => {
+			const tabIndex = (e.target as HTMLButtonElement).getAttribute(
+				'data-tabindex'
+			)
+			console.log(e.target)
+			const tabNumber = tabIndex || 1
+			setSelectedTab(+tabNumber)
+			const elX = e.screenX
+			const elY = e.screenY
+			window.scroll(elX, elY)
+		},
+		[selectedTab]
+	)
 	return (
 		<div className={cl.cabinet_tabs}>
-			<div className={cl.cabinet_tab}>
+			<div
+				className={selectedTab === 1 ? cl.cabinet_tab_active : cl.cabinet_tab}
+			>
 				<button
 					data-tabindex={1}
 					onClick={toggleTab}
@@ -18,9 +34,12 @@ const CabinetTabs: FC<{
 					></span>
 					Изменить данные
 				</button>
-				{/* <ChangeUserInfo /> */}
+
+				{selectedTab === 1 && <ChangeUserInfo />}
 			</div>
-			<div className={cl.cabinet_tab}>
+			<div
+				className={selectedTab === 2 ? cl.cabinet_tab_active : cl.cabinet_tab}
+			>
 				<button
 					data-tabindex={2}
 					onClick={toggleTab}
@@ -31,7 +50,7 @@ const CabinetTabs: FC<{
 					></span>
 					Изменить пароль
 				</button>
-				<ChangeUserPassword />
+				{selectedTab === 2 && <ChangeUserPassword />}
 			</div>
 			<div className={cl.cabinet_tab}>
 				<button className={cl.cabinet_tablink}>
