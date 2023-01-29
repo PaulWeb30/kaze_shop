@@ -25,31 +25,31 @@ export const UserApi = (instance: AxiosInstance) => ({
 		return data
 	},
 	async changeInfo(dto: ChangeUserInfoDto) {
-		const { data } = await instance.post<
+		const { data } = await instance.patch<
 			ChangeUserInfoDto,
 			{ data: AuthResponse }
-		>('/kaze_shop/user/update', dto)
+		>('/user/update', dto)
 		return data
 	},
 	async changePassword(dto: ChangeUserPasswordDto) {
 		const { data } = await instance.patch<
 			ChangeUserPasswordDto,
 			{ data: AuthResponse }
-		>('/kaze_shop/auth/change', dto)
+		>('/auth/change', dto)
 		return data
 	},
 	async logout() {
 		const { data } = await instance.post<
 			ChangeUserPasswordDto,
 			{ data: AuthResponse }
-		>('/kaze_shop/auth/logout')
+		>('/auth/logout')
 		return data
 	},
 	async forgotPassword(dto: ForgotPasswordDto) {
 		const { data } = await instance.post<
 			ForgotPasswordDto,
 			{ data: AuthResponse }
-		>('/kaze_shop/auth/logout')
+		>('/auth/logout')
 		return data
 	},
 })

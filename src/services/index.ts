@@ -17,6 +17,7 @@ export const Api = (
 
 	const instance = axios.create({
 		baseURL: API_URL,
+		withCredentials: true,
 		headers: {
 			Authorization: 'Bearer ' + token,
 		},
