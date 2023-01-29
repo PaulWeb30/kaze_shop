@@ -38,3 +38,7 @@ export type ChangeUserPasswordDto = {
 	password: string
 	confirmPassword: string
 }
+
+export type ForgotPasswordDto = {
+	email: string
+}

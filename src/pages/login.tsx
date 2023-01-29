@@ -122,7 +122,7 @@ const Login = () => {
 										<input type='checkbox' />
 										<span>Запомнить меня</span>
 									</div>
-									<Link href={'#'} className='auth_detail_link'>
+									<Link href={'/forgot_password'} className='auth_detail_link'>
 										Забыл пароль
 									</Link>
 								</div>

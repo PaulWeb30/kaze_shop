@@ -73,3 +73,13 @@ export const ChangeUserPasswordShema = yup.object().shape({
 		.string()
 		.oneOf([yup.ref('password'), null], 'Passwords must match'),
 })
+
+export const ForgotPasswordSchema = yup.object().shape({
+	email: yup
+		.string()
+		.required('Почта обязательная')
+		.matches(
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+			'Inccorrect email'
+		),
+})
