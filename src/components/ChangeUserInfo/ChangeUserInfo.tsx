@@ -5,29 +5,41 @@ import { ChangeUserInfoDto } from '@/types/auth'
 import { ChangeUserInfoShema } from '@/utils/validation'
 import cl from '../../styles/cabinet.module.scss'
 import { Api } from '@/services'
-
-import { useAppDispatch } from '@/redux/hooks'
+import { setCookie } from 'nookies'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { selectUserInfo } from '@/redux/slices/user'
 import { useRouter } from 'next/router'
 import { addUserInfo } from '@/redux/slices/user'
 const ChangeUserInfo = () => {
 	const dispatch = useAppDispatch()
 	const router = useRouter()
+	const userInfo = useAppSelector(selectUserInfo)
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [requestLoading, setRequestLoading] = useState<boolean>(false)
 	const changeUserInfoForm = useForm<ChangeUserInfoDto>({
 		mode: 'onChange',
 		resolver: yupResolver(ChangeUserInfoShema),
+		defaultValues: {
+			name: userInfo?.name || 'Name',
+			surname: userInfo?.surname || 'Surname',
+			country: userInfo?.country || 'Country',
+			city: userInfo?.city || 'City',
+			postOffice: userInfo?.postOffice || 'Post office',
+		},
 	})
 
 	const onSubmit = async (dto: ChangeUserInfoDto) => {
 		try {
 			setRequestLoading(true)
-			console.log(dto)
 			const data = await Api().user.changeInfo(dto)
+			setCookie(null, 'accessToken', data.accessToken, {
+				maxAge: 30 * 24 * 60 * 60,
+				path: '/',
+			})
 			dispatch(addUserInfo(data.user))
 		} catch (err) {
-			setRequestLoading(false)
 			console.warn('Register error', err)
+			setRequestLoading(false)
 			if (err.response) {
 				console.warn('Register error after response', err.response.data.message)
 				setErrorMessage(err.response.data.message)
@@ -128,7 +140,7 @@ const ChangeUserInfo = () => {
 					className={cl.cabinet_btn}
 					type='submit'
 				>
-					Cохранить
+					{requestLoading ? 'Loading..' : 'Cохранить'}
 				</button>
 				<div>
 					<p className='auth_error'>{errorMessage}</p>

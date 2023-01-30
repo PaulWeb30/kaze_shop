@@ -53,7 +53,7 @@ const Signup = () => {
 				setSignUpLoading(true)
 				const data = await Api().user.registration(registrationData)
 
-				setCookie(null, 'token', data.accessToken, {
+				setCookie(null, 'accessToken', data.accessToken, {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',
 				})
