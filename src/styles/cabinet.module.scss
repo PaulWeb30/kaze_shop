@@ -8,6 +8,9 @@
 			width: 100%;
 		}
 	}
+	&_borderBottom {
+		border-bottom: 1.5px solid #9d9d9d !important;
+	}
 	&_tab {
 		display: flex;
 		position: relative;
@@ -44,10 +47,9 @@
 	&_tablink {
 		position: relative;
 		color: #9d9d9d;
-		border-top: 1.5px solid #9d9d9d;
-		border-bottom: 1.5px solid #9d9d9d;
-		border-left: 1.5px solid #9d9d9d;
-		border-right: 1.5px solid #9d9d9d;
+		border: 1.5px solid #9d9d9d;
+		border-bottom: none;
+		outline: none;
 		display: block;
 		padding: 18px 54px;
 		text-align: center;

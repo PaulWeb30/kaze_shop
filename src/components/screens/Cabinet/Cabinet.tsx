@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute } from 'react'
+import React from 'react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { selectUserInfo } from '../../../redux/slices/user'
 import { NextPage } from 'next'

@@ -90,7 +90,7 @@ const CabinetTabs: FC = () => {
 					<button
 						data-tabindex={7}
 						onClick={toggleTab}
-						className={cl.cabinet_tablink}
+						className={`${cl.cabinet_tablink} ${cl.cabinet_borderBottom}`}
 					>
 						<span
 							className={`${cl.cabinet_icon} ${cl.cabinet_icon_logout}`}
