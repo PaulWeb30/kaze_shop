@@ -11,14 +11,14 @@ import axios from 'axios'
 import { API_URL } from './index'
 export const UserApi = (instance: AxiosInstance) => ({
 	async login(dto: LoginDto) {
-		const { data } = await axios.post<LoginDto, { data: AuthResponse }>(
+		const { data } = await instance.post<LoginDto, { data: AuthResponse }>(
 			API_URL + '/auth/login',
 			dto
 		)
 		return data
 	},
 	async registration(dto: CreateUserDto) {
-		const { data } = await axios.put<CreateUserDto, { data: AuthResponse }>(
+		const { data } = await instance.put<CreateUserDto, { data: AuthResponse }>(
 			API_URL + '/auth/signup',
 			dto
 		)
