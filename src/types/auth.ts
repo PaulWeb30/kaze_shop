@@ -20,10 +20,28 @@ export type User = {
 	city: string | null
 	postOffice: string | null
 }
+export type Owner = {
+	id: number
+	name: string
+	surname: string
+	phoneNumber: string
+	email: string
+}
+
+export type Admin = {
+	id: number
+	name: string
+	surname: string
+	phoneNumber: string
+	email: string
+}
+
 export type AuthResponse = {
 	type?: 'OWNER' | 'ADMIN'
 	accessToken: string
-	user: User
+	user?: User
+	owner?: Owner
+	admin?: Admin
 }
 
 export type ChangeUserInfoDto = {
@@ -39,6 +57,13 @@ export type ChangeUserPasswordDto = {
 	confirmPassword: string
 }
 
+export type GetCodeDto = {
+	email: string
+}
+
 export type ForgotPasswordDto = {
 	email: string
+	code: number
+	password: string
+	confirmPassword: string
 }

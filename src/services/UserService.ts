@@ -5,6 +5,7 @@ import {
 	ChangeUserInfoDto,
 	ChangeUserPasswordDto,
 	ForgotPasswordDto,
+	GetCodeDto,
 } from '@/types/auth'
 import { AxiosInstance, AxiosResponse } from 'axios'
 import axios from 'axios'
@@ -45,11 +46,11 @@ export const UserApi = (instance: AxiosInstance) => ({
 		>('/auth/logout')
 		return data
 	},
-	async forgotPassword(dto: ForgotPasswordDto) {
+	async forgotPassword(dto:  GetCodeDto) {
 		const { data } = await instance.post<
-			ForgotPasswordDto,
+			 GetCodeDto ,
 			{ data: AuthResponse }
-		>('/auth/logout')
+		>('/auth/code', dto)
 		return data
 	},
 })
