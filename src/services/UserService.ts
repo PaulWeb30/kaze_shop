@@ -46,11 +46,17 @@ export const UserApi = (instance: AxiosInstance) => ({
 		>('/auth/logout')
 		return data
 	},
-	async forgotPassword(dto:  GetCodeDto) {
-		const { data } = await instance.post<
-			 GetCodeDto ,
-			{ data: AuthResponse }
-		>('/auth/code', dto)
+	async forgotPassword(dto: GetCodeDto) {
+		const { data } = await instance.post<GetCodeDto, { data: AuthResponse }>(
+			'/auth/code',
+			dto
+		)
+		return data
+	},
+	async getMe() {
+		const { data } = await instance.patch<{ data: AuthResponse }>(
+			'/auth/refresh'
+		)
 		return data
 	},
 })

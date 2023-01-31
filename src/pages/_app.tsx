@@ -5,6 +5,7 @@ import Layout from '@/layouts/MainLayout'
 import { wrapper } from '../redux/store'
 import { Api } from '@/services'
 import { Suspense } from 'react'
+import { addUserInfo } from '@/redux/slices/user'
 import Spinner from '@/components/Spinner/Spinner'
 function App({ Component, pageProps }: AppProps) {
 	return (
@@ -16,34 +17,29 @@ function App({ Component, pageProps }: AppProps) {
 	)
 }
 
-// App.getInitialProps = wrapper.getInitialAppProps(
-// 	store =>
-// 		async ({ ctx, Component }) => {
-// 			try {
-// 				await Api(ctx).user.getMe()
-// 			} catch (err) {
-// 				if (ctx.asPath === '/cabinet' && ctx.res) {
-// 					ctx.res.writeHead(302, {
-// 						Location: '/403',
-// 					})
-// 					ctx.res.end()
-// 				} else  {
+App.getInitialProps = wrapper.getInitialAppProps(
+	store =>
+		async ({ ctx, Component }) => {
+			try {
+				const { data } = await Api(ctx).user.getMe()
+				if (data.user) {
+					store.dispatch(addUserInfo(data.user))
+				}
+			} catch (err) {
+				// if (ctx.res) {
+				// 	ctx.res.writeHead(302, {
+				// 		Location: '/404',
+				// 	})
+				// 	ctx.res.end()
+				// }
+			}
 
-// 					ctx.res.writeHead(302, {
-// 						Location: '/404',
-// 					})
-
-// 					ctx.res.end()
-// 				}
-// 				console.log(err)
-// 			}
-
-// 			return {
-// 				pageProps: Component.getInitialProps
-// 					? await Component.getInitialProps({ ...ctx, store })
-// 					: {},
-// 			}
-// 		}
-// )
+			return {
+				pageProps: Component.getInitialProps
+					? await Component.getInitialProps({ ...ctx, store })
+					: {},
+			}
+		}
+)
 
 export default wrapper.withRedux(App)

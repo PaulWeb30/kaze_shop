@@ -16,9 +16,9 @@ export type User = {
 	surname: string
 	phoneNumber: string
 	email: string
-	country: string | null
-	city: string | null
-	postOffice: string | null
+	country?: string | null
+	city?: string | null
+	postOffice?: string | null
 }
 export type Owner = {
 	id: number

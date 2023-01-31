@@ -26,8 +26,7 @@ const userSLice = createSlice({
 	},
 })
 
-export const selectUserInfo = (state:RootState) => state.user.user
-
+export const selectUserInfo = (state: RootState) => state.user.user
 
 export const { addUserInfo } = userSLice.actions
 

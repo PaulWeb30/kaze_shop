@@ -18,9 +18,11 @@ const forgot_password = () => {
 		resolver: yupResolver(ForgotPasswordSchema),
 	})
 	const onSubmit = async (dto: ForgotPasswordDto) => {
+		console.log(dto)
 		try {
 			setLoginLoading(true)
 			await Api().user.forgotPassword(dto)
+			router.push('/login')
 		} catch (e) {
 			setLoginLoading(false)
 			router.push('/404')
@@ -47,23 +49,24 @@ const forgot_password = () => {
 						<div className='auth_form'>
 							<h3 className='auth_title'>Забыли пароль</h3>
 							<form onSubmit={forgotPasswordForm.handleSubmit(onSubmit)}>
-								<div className='auth_field'>
-									<label className='auth_label' htmlFor='email'>
-										E-mail
-									</label>
-									<div className='auth_input'>
-										<input
-											placeholder='Введите e-mail'
-											type='text'
-											{...forgotPasswordForm.register('email')}
-										/>
+								<div className='register_form'>
+									<div className='auth_field'>
+										<label className='auth_label' htmlFor='email'>
+											E-mail
+										</label>
+										<div className='auth_input'>
+											<input
+												placeholder='Введите e-mail'
+												type='text'
+												{...forgotPasswordForm.register('email')}
+											/>
+										</div>
+										<span className='auth_error'>
+											{forgotPasswordForm.formState.errors.email &&
+												forgotPasswordForm.formState.errors.email.message}
+										</span>
 									</div>
-									<span className='auth_error'>
-										{forgotPasswordForm.formState.errors.email &&
-											forgotPasswordForm.formState.errors.email.message}
-									</span>
 								</div>
-
 								{errorMessage && (
 									<span className='auth_error'>{errorMessage}</span>
 								)}

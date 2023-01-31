@@ -42,7 +42,7 @@ const LogoutModal: FC<{ closeModal: (tab: number) => void }> = ({
 						onClick={logout}
 						className={cl.modal_confirm}
 					>
-						Выйти
+						{requestLoading ? 'Loading' : 'Выйти'}
 					</button>
 				</div>
 			</div>

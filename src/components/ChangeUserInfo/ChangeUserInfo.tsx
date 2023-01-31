@@ -36,7 +36,11 @@ const ChangeUserInfo = () => {
 				maxAge: 30 * 24 * 60 * 60,
 				path: '/',
 			})
-			dispatch(addUserInfo(data.user))
+			if (data.user) {
+				dispatch(addUserInfo(data.user))
+			} else if (data.admin) {
+				dispatch(addUserInfo(data.admin))
+			}
 		} catch (err) {
 			console.warn('Register error', err)
 			setRequestLoading(false)
