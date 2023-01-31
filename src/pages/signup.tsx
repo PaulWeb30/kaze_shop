@@ -57,7 +57,9 @@ const Signup = () => {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',
 				})
-				dispatch(addUserInfo(data.user))
+				if (data.user) {
+					dispatch(addUserInfo(data.user))
+				}
 				router.push('/cabinet')
 			}
 		} catch (err) {

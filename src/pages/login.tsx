@@ -17,7 +17,7 @@ import SpinnerLayout from '@/layouts/SpinnerLayout'
 import { useRouter } from 'next/router'
 const Login = () => {
 	const dispatch = useAppDispatch()
-	
+
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [passwordShown, setPasswordShown] = useState(false)
@@ -39,7 +39,9 @@ const Login = () => {
 				maxAge: 30 * 24 * 60 * 60,
 				path: '/',
 			})
-			dispatch(addUserInfo(data.user))
+			if (data.user) {
+				dispatch(addUserInfo(data.user))
+			}
 			router.push('/cabinet')
 		} catch (err) {
 			setLoginLoading(false)

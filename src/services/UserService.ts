@@ -46,7 +46,14 @@ export const UserApi = (instance: AxiosInstance) => ({
 		>('/auth/logout')
 		return data
 	},
-	async forgotPassword(dto: GetCodeDto) {
+	async forgotPassword(dto: ForgotPasswordDto) {
+		const { data } = await instance.post<
+			ForgotPasswordDto,
+			{ data: AuthResponse }
+		>('/auth/forgotPassword', dto)
+		return data
+	},
+	async getForgotPasswordCode(dto: GetCodeDto) {
 		const { data } = await instance.post<GetCodeDto, { data: AuthResponse }>(
 			'/auth/code',
 			dto

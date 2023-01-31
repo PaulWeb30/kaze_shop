@@ -77,18 +77,21 @@ export const ChangeUserPasswordShema = yup.object().shape({
 export const ForgotPasswordSchema = yup
 	.object()
 	.shape({
-		email: yup
-			.string()
-			.required('Почта обязательная')
-			.matches(
-				/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-				'Inccorrect email'
-			),
-
 		code: yup
-			.number()
-			.required('Code required')
-			.min(8, 'min 8 symbols')
-			.max(8, 'max 8 symbols'),
+			.string()
+			.required('required')
+			.matches(/^[0-9]+$/, 'Must be only digits')
+			.min(8, 'Must be exactly 8 digits')
+			.max(8, 'Must be exactly 8 digits'),
 	})
 	.concat(ChangeUserPasswordShema)
+
+export const GetForgotPasswordCodeSchema = yup.object().shape({
+	email: yup
+		.string()
+		.required('Почта обязательная')
+		.matches(
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+			'Inccorrect email'
+		),
+})

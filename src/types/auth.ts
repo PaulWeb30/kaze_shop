@@ -62,7 +62,6 @@ export type GetCodeDto = {
 }
 
 export type ForgotPasswordDto = {
-	email: string
 	code: number
 	password: string
 	confirmPassword: string

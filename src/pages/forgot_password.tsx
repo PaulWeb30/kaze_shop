@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import SpinnerLayout from '@/layouts/SpinnerLayout'
-import { ForgotPasswordDto } from '@/types/auth'
-import { ForgotPasswordSchema } from '@/utils/validation'
+import { ForgotPasswordDto, GetCodeDto } from '@/types/auth'
+import {
+	ForgotPasswordSchema,
+	GetForgotPasswordCodeSchema,
+} from '@/utils/validation'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,19 +16,49 @@ const forgot_password = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
+	const [getCodeform, setGetFormCode] = useState<boolean>(true)
+	const getForgotPasswordCodeForm = useForm<GetCodeDto>({
+		mode: 'onChange',
+		resolver: yupResolver(GetForgotPasswordCodeSchema),
+	})
 	const forgotPasswordForm = useForm<ForgotPasswordDto>({
 		mode: 'onChange',
 		resolver: yupResolver(ForgotPasswordSchema),
 	})
-	const onSubmit = async (dto: ForgotPasswordDto) => {
-		console.log(dto)
+	forgotPasswordForm
+	const onSubmitGetCode = async (dto: GetCodeDto) => {
+		try {
+			setLoginLoading(true)
+			await Api().user.getForgotPasswordCode(dto)
+			setLoginLoading(false)
+			setGetFormCode(true)
+		} catch (err) {
+			setLoginLoading(false)
+			console.warn('Register error', err)
+			if (err.response) {
+				console.warn('Register error after response', err.response.data.message)
+				setErrorMessage(err.response.data.message)
+			} else {
+				router.push('/404')
+			}
+		}
+	}
+
+	const onSubmitForgotPassword = async (dto: ForgotPasswordDto) => {
 		try {
 			setLoginLoading(true)
 			await Api().user.forgotPassword(dto)
 			router.push('/login')
-		} catch (e) {
 			setLoginLoading(false)
-			router.push('/404')
+		} catch (err) {
+			setLoginLoading(false)
+			console.warn('Register error', err)
+			if (err.response) {
+				console.warn('Register error after response', err.response.data.message)
+				setErrorMessage(err.response.data.message)
+			} else {
+				router.push('/404')
+			}
 		}
 	}
 	return (
@@ -48,36 +81,112 @@ const forgot_password = () => {
 						</div>
 						<div className='auth_form'>
 							<h3 className='auth_title'>Забыли пароль</h3>
-							<form onSubmit={forgotPasswordForm.handleSubmit(onSubmit)}>
-								<div className='register_form'>
-									<div className='auth_field'>
-										<label className='auth_label' htmlFor='email'>
-											E-mail
-										</label>
-										<div className='auth_input'>
-											<input
-												placeholder='Введите e-mail'
-												type='text'
-												{...forgotPasswordForm.register('email')}
-											/>
-										</div>
-										<span className='auth_error'>
-											{forgotPasswordForm.formState.errors.email &&
-												forgotPasswordForm.formState.errors.email.message}
-										</span>
-									</div>
-								</div>
-								{errorMessage && (
-									<span className='auth_error'>{errorMessage}</span>
-								)}
-								<button
-									className='auth_btn'
-									type='submit'
-									disabled={loginLoading}
+							{!getCodeform ? (
+								<form
+									onSubmit={getForgotPasswordCodeForm.handleSubmit(
+										onSubmitGetCode
+									)}
 								>
-									{loginLoading ? 'Loading...' : 'Восстановить пароль'}
-								</button>
-							</form>
+									<div className='register_form'>
+										<div className='auth_field'>
+											<label className='auth_label' htmlFor='email'>
+												E-mail
+											</label>
+											<div className='auth_input'>
+												<input
+													placeholder='Введите e-mail'
+													type='text'
+													{...getForgotPasswordCodeForm.register('email')}
+												/>
+											</div>
+											<span className='auth_error'>
+												{getForgotPasswordCodeForm.formState.errors.email &&
+													getForgotPasswordCodeForm.formState.errors.email
+														.message}
+											</span>
+										</div>
+									</div>
+									{errorMessage && (
+										<span className='auth_error'>{errorMessage}</span>
+									)}
+									<button
+										className='auth_btn'
+										type='submit'
+										disabled={loginLoading}
+									>
+										{loginLoading ? 'Loading...' : 'Восстановить пароль'}
+									</button>
+								</form>
+							) : (
+								<form
+									onSubmit={forgotPasswordForm.handleSubmit(
+										onSubmitForgotPassword
+									)}
+								>
+									<div className='register_form'>
+										<div className='auth_field'>
+											<label className='auth_label' htmlFor='email'>
+												8-ти значный код
+											</label>
+											<div className='auth_input'>
+												<input
+													placeholder='Введите 8-ти значный код'
+													type='text'
+													{...forgotPasswordForm.register('code')}
+												/>
+											</div>
+											<span className='auth_error'>
+												{forgotPasswordForm.formState.errors.code &&
+													forgotPasswordForm.formState.errors.code.message}
+											</span>
+											<span>Не получили код? Отправить еще раз</span>
+										</div>
+										<div className='auth_field'>
+											<label className='auth_label' htmlFor='email'>
+												Придумайте пароль
+											</label>
+											<div className='auth_input'>
+												<input
+													placeholder='Введите пароль'
+													type='text'
+													{...forgotPasswordForm.register('password')}
+												/>
+											</div>
+											<span className='auth_error'>
+												{forgotPasswordForm.formState.errors.password &&
+													forgotPasswordForm.formState.errors.password.message}
+											</span>
+										</div>
+										<div className='auth_field'>
+											<label className='auth_label' htmlFor='email'>
+												Повторите пароль
+											</label>
+											<div className='auth_input'>
+												<input
+													placeholder='Повторите пароль'
+													type='text'
+													{...forgotPasswordForm.register('confirmPassword')}
+												/>
+											</div>
+											<span className='auth_error'>
+												{forgotPasswordForm.formState.errors.confirmPassword &&
+													forgotPasswordForm.formState.errors.confirmPassword
+														.message}
+											</span>
+										</div>
+									</div>
+									{errorMessage && (
+										<span className='auth_error'>{errorMessage}</span>
+									)}
+									<button
+										className='auth_btn'
+										type='submit'
+										disabled={loginLoading}
+									>
+										{loginLoading ? 'Loading...' : 'Восстановить пароль'}
+									</button>
+								</form>
+							)}
 						</div>
 					</div>
 				</div>
