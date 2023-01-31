@@ -17,29 +17,29 @@ function App({ Component, pageProps }: AppProps) {
 	)
 }
 
-App.getInitialProps = wrapper.getInitialAppProps(
-	store =>
-		async ({ ctx, Component }) => {
-			try {
-				const { data } = await Api(ctx).user.getMe()
-				if (data.user) {
-					store.dispatch(addUserInfo(data.user))
-				}
-			} catch (err) {
-				// if (ctx.res) {
-				// 	ctx.res.writeHead(302, {
-				// 		Location: '/404',
-				// 	})
-				// 	ctx.res.end()
-				// }
-			}
+// App.getInitialProps = wrapper.getInitialAppProps(
+// 	store =>
+// 		async ({ ctx, Component }) => {
+// 			try {
+// 				const { data } = await Api(ctx).user.getMe()
+// 				if (data.user) {
+// 					store.dispatch(addUserInfo(data.user))
+// 				}
+// 			} catch (err) {
+// 				if (ctx.res && err.response) {
+// 					ctx.res.writeHead(302, {
+// 						Location: '/login',
+// 					})
+// 					ctx.res.end()
+// 				}
+// 			}
 
-			return {
-				pageProps: Component.getInitialProps
-					? await Component.getInitialProps({ ...ctx, store })
-					: {},
-			}
-		}
-)
+// 			return {
+// 				pageProps: Component.getInitialProps
+// 					? await Component.getInitialProps({ ...ctx, store })
+// 					: {},
+// 			}
+// 		}
+// )
 
 export default wrapper.withRedux(App)

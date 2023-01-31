@@ -35,9 +35,12 @@ export const Api = (
 			) {
 				originalRequest._isRetry = true
 				try {
-					const response = await axios.patch<AuthResponse>(`${API_URL}/auth/refresh`, {
-						withCredentials: true,
-					})
+					const response = await axios.patch<AuthResponse>(
+						`${API_URL}/auth/refresh`,
+						{
+							withCredentials: true,
+						}
+					)
 					setCookie(null, 'accessToken', response.data.accessToken, {
 						maxAge: 30 * 24 * 60 * 60,
 						path: '/',

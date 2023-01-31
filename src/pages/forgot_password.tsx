@@ -139,7 +139,7 @@ const forgot_password = () => {
 												{forgotPasswordForm.formState.errors.code &&
 													forgotPasswordForm.formState.errors.code.message}
 											</span>
-											<span>Не получили код? Отправить еще раз</span>
+											<span>Не получили к</span>
 										</div>
 										<div className='auth_field'>
 											<label className='auth_label' htmlFor='email'>
