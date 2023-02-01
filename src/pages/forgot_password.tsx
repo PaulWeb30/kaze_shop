@@ -17,7 +17,7 @@ const forgot_password = () => {
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
 
-	const [getCodeform, setGetFormCode] = useState<boolean>(true)
+	const [getCodeform, setGetFormCode] = useState<boolean>(false)
 	const getForgotPasswordCodeForm = useForm<GetCodeDto>({
 		mode: 'onChange',
 		resolver: yupResolver(GetForgotPasswordCodeSchema),

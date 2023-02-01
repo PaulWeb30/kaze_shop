@@ -47,10 +47,10 @@ export const UserApi = (instance: AxiosInstance) => ({
 		return data
 	},
 	async forgotPassword(dto: ForgotPasswordDto) {
-		const { data } = await instance.post<
+		const { data } = await instance.patch<
 			ForgotPasswordDto,
 			{ data: AuthResponse }
-		>('/auth/forgotPassword', dto)
+		>('/auth/reset', dto)
 		return data
 	},
 	async getForgotPasswordCode(dto: GetCodeDto) {
