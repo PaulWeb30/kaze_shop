@@ -17,7 +17,7 @@ const forgot_password = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
-	const [getCodeform, setGetFormCode] = useState<boolean>(true)
+	const [getCodeform, setGetFormCode] = useState<boolean>(false)
 	const getForgotPasswordCodeForm = useForm<GetCodeDto>({
 		mode: 'onChange',
 		resolver: yupResolver(GetForgotPasswordCodeSchema),
@@ -30,7 +30,10 @@ const forgot_password = () => {
 		mode: 'onChange',
 		resolver: yupResolver(ForgotPasswordSchema),
 	})
-
+	const getPasswordCodeAgain = async () => {
+		const emailValue = getForgotPasswordCodeForm.getValues('email')
+		await Api().user.getForgotPasswordCode({ email: emailValue })
+	}
 	const onSubmitGetCode = async (dto: GetCodeDto) => {
 		try {
 			setLoginLoading(true)
@@ -77,7 +80,8 @@ const forgot_password = () => {
 			<main className='content'>
 				<div className='container'>
 					<div className='page_coordinator'>
-						<Link href={'/'}> Главная</Link> | <span>Забыли пароль</span>
+						<Link href={'/'}> Главная</Link> |{' '}
+						<span onClick={getPasswordCodeAgain}>Забыли пароль</span>
 					</div>
 					<div className='auth_block'>
 						<div className='auth_image'>

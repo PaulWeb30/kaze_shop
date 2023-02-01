@@ -41,6 +41,7 @@ const ChangeUserInfo = () => {
 			} else if (data.admin) {
 				dispatch(addUserInfo(data.admin))
 			}
+			setRequestLoading(false)
 		} catch (err) {
 			console.warn('Register error', err)
 			setRequestLoading(false)
