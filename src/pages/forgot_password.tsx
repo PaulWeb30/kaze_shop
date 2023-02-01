@@ -81,7 +81,7 @@ const forgot_password = () => {
 				<div className='container'>
 					<div className='page_coordinator'>
 						<Link href={'/'}> Главная</Link> |{' '}
-						<span onClick={getPasswordCodeAgain}>Забыли пароль</span>
+						<span>Забыли пароль</span>
 					</div>
 					<div className='auth_block'>
 						<div className='auth_image'>
@@ -172,7 +172,7 @@ const forgot_password = () => {
 												{forgotPasswordForm.formState.errors.code &&
 													forgotPasswordForm.formState.errors.code.message}
 											</span>
-											<span>Не получили код? Отправить еще раз</span>
+											<span onClick={getPasswordCodeAgain}>Не получили код? Отправить еще раз</span>
 										</div>
 										<div className='auth_field'>
 											<label className='auth_label' htmlFor='email'>
