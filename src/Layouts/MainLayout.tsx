@@ -26,7 +26,7 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
 					rel='stylesheet'
 				></link>
 			</Head>
-			{/* <main className={RussoOne.className}></main> */}
+			
 			<div className='wrapper'>
 				<Header />
 				{children}
