@@ -14,42 +14,43 @@ const CabinetPage: NextPage = () => {
 	)
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(
-	store => async context => {
-		if (!context.req.cookies.accessToken) {
-			return {
-				redirect: {
-					permanent: false,
-					destination: '/login',
-				},
-				props: {},
-			}
-		}
+// export const getServerSideProps = wrapper.getServerSideProps(
+// 	store => async context => {
+// 		if (!context.req.cookies.accessToken) {
+// 			return {
+// 				redirect: {
+// 					permanent: false,
+// 					destination: '/login',
+// 				},
+// 				props: {},
+// 			}
+// 		}
 
-		try {
-			const data = await Api(context).user.getMe()
+// 		try {
+// 			const data = await Api(context).user.getMe()
 
-			if (data.user) {
-				store.dispatch(addUserInfo(data.user))
-			}
-		} catch (e) {
-			return {
-				redirect: {
-					permanent: false,
-					destination: '/login',
-				},
-				props: {},
-			}
-		}
+// 			if (data.user) {
+// 				store.dispatch(addUserInfo(data.user))
+// 			}
+// 		} catch (e) {
+// 			return {
+// 				redirect: {
+// 					permanent: false,
+// 					destination: '/login',
+// 				},
+// 				props: {},
+// 			}
+// 		}
 
-		return { props: {} }
-	}
-)
+// 		return { props: {} }
+// 	}
+// )
+
+export const getServerSideProps = withAuth(async context => {
+	return { props: {} }
+})
 
 export default CabinetPage
-// export const getServerSideProps = withAuth(async context => {
-// 	return { props: {} }
-// })
 
 // export const getServerSideProps = async () => {
 // 	const { data } = await axios.get(
