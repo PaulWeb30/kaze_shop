@@ -46,6 +46,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 	}
 )
 
+export default CabinetPage
 // export const getServerSideProps = withAuth(async context => {
 // 	return { props: {} }
 // })
@@ -56,5 +57,3 @@ export const getServerSideProps = wrapper.getServerSideProps(
 // 	)
 // 	return { props: { data } }
 // }
-
-export default CabinetPage

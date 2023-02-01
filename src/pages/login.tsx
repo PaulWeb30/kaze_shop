@@ -62,7 +62,7 @@ const Login = () => {
 					<div className='page_coordinator'>
 						<Link href={'/'}> Главная</Link> | <span>Вход</span>
 					</div>
-					<div className='auth_block'>
+					<div className='auth_block j-center'>
 						<div className='auth_image'>
 							<Image
 								src={AuthImg}

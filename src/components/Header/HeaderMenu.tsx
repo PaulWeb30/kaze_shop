@@ -6,7 +6,7 @@ const HeaderMenu: FC<{ classNameToggle: boolean }> = ({ classNameToggle }) => {
 		<nav className={classNameToggle ? cl.header__menu_open : cl.header__menu}>
 			<ul className={cl.header__list}>
 				<li className={cl.header__list_account}>
-					<Link href='#' className={cl.header__list_link}>
+					<Link href='/cabinet' className={cl.header__list_link}>
 						Личный кабинет
 					</Link>
 				</li>

@@ -134,7 +134,7 @@ const forgot_password = () => {
 										onSubmitForgotPassword
 									)}
 								>
-									<div className='register_form'>
+									<div className='register_form  w-100'>
 										<div className='auth_field'>
 											<label className='auth_label' htmlFor='email'>
 												E-mail
