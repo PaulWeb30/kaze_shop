@@ -16,6 +16,7 @@ const forgot_password = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
+	const [emailValue, setEmailValue] = useState<string>('')
 	const [getCodeform, setGetFormCode] = useState<boolean>(true)
 	const getForgotPasswordCodeForm = useForm<GetCodeDto>({
 		mode: 'onChange',
@@ -46,19 +47,21 @@ const forgot_password = () => {
 
 	const onSubmitForgotPassword = async (dto: ForgotPasswordDto) => {
 		try {
+			const data = { email: emailValue, ...dto }
+			console.log(data)
 			setLoginLoading(true)
-			await Api().user.forgotPassword(dto)
+			await Api().user.forgotPassword(data)
 			router.push('/login')
 			setLoginLoading(false)
 		} catch (err) {
 			setLoginLoading(false)
 			console.warn('Register error', err)
-			if (err.response) {
-				console.warn('Register error after response', err.response.data.message)
-				setErrorMessage(err.response.data.message)
-			} else {
-				router.push('/404')
-			}
+			// if (err.response) {
+			// 	console.warn('Register error after response', err.response.data.message)
+			// 	setErrorMessage(err.response.data.message)
+			// } else {
+			// 	router.push('/404')
+			// }
 		}
 	}
 	return (
@@ -126,6 +129,24 @@ const forgot_password = () => {
 									<div className='register_form'>
 										<div className='auth_field'>
 											<label className='auth_label' htmlFor='email'>
+												E-mail
+											</label>
+											<div className='auth_input'>
+												<input
+													disabled={true}
+													placeholder='Введите e-mail'
+													type='text'
+													{...getForgotPasswordCodeForm.register('email')}
+												/>
+											</div>
+											<span className='auth_error'>
+												{getForgotPasswordCodeForm.formState.errors.email &&
+													getForgotPasswordCodeForm.formState.errors.email
+														.message}
+											</span>
+										</div>
+										<div className='auth_field'>
+											<label className='auth_label' htmlFor='email'>
 												8-ти значный код
 											</label>
 											<div className='auth_input'>
@@ -139,7 +160,7 @@ const forgot_password = () => {
 												{forgotPasswordForm.formState.errors.code &&
 													forgotPasswordForm.formState.errors.code.message}
 											</span>
-											<span>Не получили к</span>
+											<span>Не получили код? Отправить еще раз</span>
 										</div>
 										<div className='auth_field'>
 											<label className='auth_label' htmlFor='email'>

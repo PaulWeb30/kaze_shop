@@ -34,8 +34,8 @@ const CabinetPage: NextPage = () => {
 // 		setCookie
 // 		return {
 // 			props: {},
-// 		}
-// 	}
+// 		}                             
+// 	}                                      
 // )
 
 export const getServerSideProps = withAuth(async context => {
