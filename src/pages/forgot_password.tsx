@@ -16,17 +16,21 @@ const forgot_password = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
-	const [emailValue, setEmailValue] = useState<string>('')
+
 	const [getCodeform, setGetFormCode] = useState<boolean>(true)
 	const getForgotPasswordCodeForm = useForm<GetCodeDto>({
 		mode: 'onChange',
 		resolver: yupResolver(GetForgotPasswordCodeSchema),
 	})
-	const forgotPasswordForm = useForm<ForgotPasswordDto>({
+	const forgotPasswordForm = useForm<{
+		code: string
+		password: string
+		confirmPassword: string
+	}>({
 		mode: 'onChange',
 		resolver: yupResolver(ForgotPasswordSchema),
 	})
-	forgotPasswordForm
+
 	const onSubmitGetCode = async (dto: GetCodeDto) => {
 		try {
 			setLoginLoading(true)
@@ -45,10 +49,14 @@ const forgot_password = () => {
 		}
 	}
 
-	const onSubmitForgotPassword = async (dto: ForgotPasswordDto) => {
+	const onSubmitForgotPassword = async (dto: {
+		code: number
+		password: string
+		confirmPassword: string
+	}) => {
+		const emailValue = getForgotPasswordCodeForm.getValues('email')
+		const data = { ...dto, email: emailValue }
 		try {
-			const data = { email: emailValue, ...dto }
-			console.log(data)
 			setLoginLoading(true)
 			await Api().user.forgotPassword(data)
 			router.push('/login')
