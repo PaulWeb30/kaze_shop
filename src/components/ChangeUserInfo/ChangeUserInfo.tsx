@@ -20,11 +20,11 @@ const ChangeUserInfo = () => {
 		mode: 'onChange',
 		resolver: yupResolver(ChangeUserInfoShema),
 		defaultValues: {
-			name: userInfo?.name || 'Name',
-			surname: userInfo?.surname || 'Surname',
-			country: userInfo?.country || 'Country',
-			city: userInfo?.city || 'City',
-			postOffice: userInfo?.postOffice || 'Post office',
+			name: userInfo?.name || '',
+			surname: userInfo?.surname || '',
+			country: userInfo?.country || '',
+			city: userInfo?.city || '',
+			postOffice: userInfo?.postOffice || '',
 		},
 	})
 

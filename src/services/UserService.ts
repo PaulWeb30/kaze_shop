@@ -60,9 +60,15 @@ export const UserApi = (instance: AxiosInstance) => ({
 		)
 		return data
 	},
+	// async getMe() {
+	// 	const { data } = await instance.patch<GetCodeDto, { data: AuthResponse }>(
+	// 		'/auth/refresh'
+	// 	)
+	// 	return data
+	// },
 	async getMe() {
-		const { data } = await instance.patch<{ data: AuthResponse }>(
-			'/auth/refresh'
+		const { data } = await axios.patch<GetCodeDto, { data: AuthResponse }>(
+			'https://jsonplaceholder.typicode.com/users/1'
 		)
 		return data
 	},

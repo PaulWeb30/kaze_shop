@@ -57,6 +57,7 @@
 		flex-direction: column;
 		// justify-content: center;
 		min-width: 350px;
+		
 		gap: 10px;
 		margin-bottom: 35px;
 	}
@@ -90,7 +91,7 @@
 			width: 95%;
 			border: none;
 			outline: none;
-			background: transparent;
+			background: transparent !important;
 		}
 
 		input:-webkit-autofill {

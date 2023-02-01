@@ -62,7 +62,7 @@ export type GetCodeDto = {
 }
 
 export type ForgotPasswordDto = {
-	code: number
+	code: string
 	password: string
 	confirmPassword: string
 }

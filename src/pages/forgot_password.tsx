@@ -50,7 +50,7 @@ const forgot_password = () => {
 	}
 
 	const onSubmitForgotPassword = async (dto: {
-		code: number
+		code: string
 		password: string
 		confirmPassword: string
 	}) => {
@@ -64,12 +64,12 @@ const forgot_password = () => {
 		} catch (err) {
 			setLoginLoading(false)
 			console.warn('Register error', err)
-			// if (err.response) {
-			// 	console.warn('Register error after response', err.response.data.message)
-			// 	setErrorMessage(err.response.data.message)
-			// } else {
-			// 	router.push('/404')
-			// }
+			if (err.response) {
+				console.warn('Register error after response', err.response.data.message)
+				setErrorMessage(err.response.data.message)
+			} else {
+				router.push('/404')
+			}
 		}
 	}
 	return (

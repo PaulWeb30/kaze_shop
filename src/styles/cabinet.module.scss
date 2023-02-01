@@ -4,11 +4,16 @@
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		@media (max-width: 700px) {
-			width: 100%;
-		}
+		// @media (max-width: 700px) {
+		// 	width: 100%;
+		// }
 	}
 	&_borderBottom {
+		@media (max-width: 900px) {
+			border-bottom: 1.5px solid #9d9d9d !important;
+		}
+	}
+	&_borderBottom2 {
 		border-bottom: 1.5px solid #9d9d9d !important;
 	}
 	&_tab {
@@ -33,14 +38,10 @@
 		@media (max-width: 1100px) {
 			width: 62vw;
 		}
-		@media (max-width: 900px) {
-			width: 63vw;
-		}
 
-		@media (max-width: 700px) {
+		@media (max-width: 900px) {
 			position: static;
-			justify-content: center;
-			width: 97vw;
+			width: 95vw;
 			margin-top: 20px;
 		}
 	}
@@ -62,7 +63,6 @@
 		transition: 0.4s linear background-color;
 		cursor: pointer;
 		width: 100%;
-
 		&:hover {
 			background: #0b0b0b;
 			color: #fff;
@@ -98,8 +98,10 @@
 		color: #ffffff;
 		padding: 16px 0;
 		margin-bottom: 50px;
-		@media (max-width: 700px) {
+		@media (max-width: 900px) {
 			margin-bottom: 20px;
+			width: 100%;
+			max-width: 100%;
 		}
 	}
 	&_field {
@@ -112,9 +114,9 @@
 			flex: 1 1 100%;
 		}
 		@media (max-width: 900px) {
-			flex: 0 1 70%;
+			flex: 1 1 70%;
 			&:nth-child(5) {
-				flex: 0 1 70%;
+				flex: 1 1 70%;
 			}
 		}
 	}

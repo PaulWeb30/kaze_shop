@@ -3,9 +3,9 @@ import SpinnerLayout from '@/layouts/SpinnerLayout'
 import { wrapper } from '@/redux/store'
 import { addUserInfo } from '@/redux/slices/user'
 import { withAuth } from '@/hoc/RequiredAuth'
-import { setCookie } from 'nookies'
 import { NextPage } from 'next'
 import { Api } from '@/services'
+import axios from 'axios'
 const CabinetPage: NextPage = () => {
 	return (
 		<SpinnerLayout>
@@ -14,32 +14,47 @@ const CabinetPage: NextPage = () => {
 	)
 }
 
-// export const getServerSideProps = wrapper.getServerSideProps(
-// 	store => async context => {
-// 		if (!context.req.cookies.accessToken) {
-// 			return {
-// 				redirect: {
-// 					permanent: false,
-// 					destination: '/login',
-// 				},
-// 				props: {},
-// 			}
-// 		}
+export const getServerSideProps = wrapper.getServerSideProps(
+	store => async context => {
+		if (!context.req.cookies.accessToken) {
+			return {
+				redirect: {
+					permanent: false,
+					destination: '/login',
+				},
+				props: {},
+			}
+		}
 
-// 		const { data } = await Api(context).user.getMe()
+		try {
+			const data = await Api(context).user.getMe()
 
-// 		if (data.user) {
-// 			store.dispatch(addUserInfo(data.user))
-// 		}
-// 		setCookie
-// 		return {
-// 			props: {},
-// 		}                             
-// 	}                                      
-// )
+			if (data.user) {
+				store.dispatch(addUserInfo(data.user))
+			}
+		} catch (e) {
+			return {
+				redirect: {
+					permanent: false,
+					destination: '/login',
+				},
+				props: {},
+			}
+		}
 
-export const getServerSideProps = withAuth(async context => {
-	return { props: {} }
-})
+		return { props: {} }
+	}
+)
+
+// export const getServerSideProps = withAuth(async context => {
+// 	return { props: {} }
+// })
+
+// export const getServerSideProps = async () => {
+// 	const { data } = await axios.get(
+// 		'https://jsonplaceholder.typicode.com/users/1'
+// 	)
+// 	return { props: { data } }
+// }
 
 export default CabinetPage
