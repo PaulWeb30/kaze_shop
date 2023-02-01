@@ -85,7 +85,7 @@ const Signup = () => {
 		<main className='content'>
 			<div className='container'>
 				<div className='page_coordinator'>
-					Главная | <span>Регистрация</span>
+					<Link href={'/'}> Главная</Link> | <span>Регистрация</span>
 				</div>
 				<div className='auth_block'>
 					<div className='auth_image none'>
@@ -237,9 +237,13 @@ const Signup = () => {
 										defaultChecked={privacyPolicyState}
 										onChange={() => setPrivacyPolicyState(prev => !prev)}
 									/>
-									<span>Я согласен с условиями</span>
 								</div>
-								<Link href='#' target={'_blank'} className='auth_privacy_link'>
+								<Link
+									href='https://docs.google.com/document/d/1tHo2_05AP3DrhMG3_jjheWCNUKqCD8tMv7EKd_AYTFg/edit'
+									target={'_blank'}
+									className='auth_privacy_link'
+								>
+									<span>Я согласен с условиями </span>
 									Политики конфиденциальности
 								</Link>
 							</div>
@@ -253,10 +257,12 @@ const Signup = () => {
 							>
 								{signUpLoading ? 'Loading...' : 'Зарегистрироваться'}
 							</button>
+							<p className='auth_more'>
+								<Link className='auth_link' href='/login'>
+									Уже есть аккаунт? <span>Войти</span>
+								</Link>
+							</p>
 						</form>
-						<Link className='auth_link' href='/login'>
-							Уже есть аккаунт? <span>Войти</span>
-						</Link>
 					</div>
 				</div>
 			</div>

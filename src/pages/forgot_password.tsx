@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SpinnerLayout from '@/layouts/SpinnerLayout'
 import { ForgotPasswordDto, GetCodeDto } from '@/types/auth'
+import Link from 'next/link'
 import {
 	ForgotPasswordSchema,
 	GetForgotPasswordCodeSchema,
@@ -16,8 +17,7 @@ const forgot_password = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
-
-	const [getCodeform, setGetFormCode] = useState<boolean>(false)
+	const [getCodeform, setGetFormCode] = useState<boolean>(true)
 	const getForgotPasswordCodeForm = useForm<GetCodeDto>({
 		mode: 'onChange',
 		resolver: yupResolver(GetForgotPasswordCodeSchema),
@@ -77,7 +77,7 @@ const forgot_password = () => {
 			<main className='content'>
 				<div className='container'>
 					<div className='page_coordinator'>
-						Главная | <span>Забыли пароль</span>
+						<Link href={'/'}> Главная</Link> | <span>Забыли пароль</span>
 					</div>
 					<div className='auth_block'>
 						<div className='auth_image'>

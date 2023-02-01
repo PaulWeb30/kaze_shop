@@ -1,8 +1,8 @@
-// html,
-// body {
-// 	max-width: 100vw;
-// 	overflow-x: hidden;
-// }
+html,
+body {
+	max-width: 100vw;
+	overflow-x: hidden;
+}
 
 // RESET STYLES
 *,
@@ -46,6 +46,10 @@ a[class] {
 button[class] {
 	cursor: pointer;
 	outline: none;
+}
+
+button:disabled {
+	opacity: 0.2;
 }
 
 input,

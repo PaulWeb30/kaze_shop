@@ -60,7 +60,7 @@ const Login = () => {
 			<main className='content'>
 				<div className='container'>
 					<div className='page_coordinator'>
-						Главная | <span>Вход</span>
+						<Link href={'/'}> Главная</Link> | <span>Вход</span>
 					</div>
 					<div className='auth_block'>
 						<div className='auth_image'>
@@ -140,9 +140,11 @@ const Login = () => {
 									{loginLoading ? 'Loading...' : 'Войти'}
 								</button>
 
-								<Link className='auth_link' href='/signup'>
-									Все еще нет аккаунта? <span>Зарегистрироваться</span>
-								</Link>
+								<p className='auth_more'>
+									<Link className='auth_link' href='/signup'>
+										Все еще нет аккаунта? <span>Зарегистрироваться</span>
+									</Link>
+								</p>
 							</form>
 						</div>
 					</div>
