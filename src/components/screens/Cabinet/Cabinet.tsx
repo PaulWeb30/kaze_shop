@@ -4,6 +4,7 @@ import { useAppDispatch } from '@/redux/hooks'
 import { useRouter } from 'next/router'
 import { addUserInfo } from '@/redux/slices/user'
 import Link from 'next/link'
+import { setCookie } from 'nookies'
 import CabinetTabs from '@/components/screens/Cabinet/CabinetTabs'
 const Cabinet: FC = () => {
 	const dispatch = useAppDispatch()
@@ -12,13 +13,19 @@ const Cabinet: FC = () => {
 		const fetchUserData = async () => {
 			try {
 				const data = await Api().user.getMe()
+				setCookie(null, 'accessToken', data.accessToken, {
+					maxAge: 30 * 24 * 60 * 60,
+					path: '/',
+				})
 				if (data.user) {
 					dispatch(addUserInfo(data.user))
 				}
 			} catch (e) {
-				router.push('/404')
+				// router.push('/404')
+				console.log(e)
 			}
 		}
+
 		fetchUserData()
 	}, [])
 	return (
