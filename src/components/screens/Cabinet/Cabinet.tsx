@@ -27,7 +27,7 @@ const Cabinet: FC = () => {
 		}
 
 		fetchUserData()
-	}, [])
+	}, [dispatch])
 	return (
 		<main className='content'>
 			<div className='container'>
