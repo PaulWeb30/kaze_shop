@@ -14,7 +14,7 @@ import { NotAuthorized } from '@/hoc/OnlyNotAuthorized'
 import { Api } from '@/services'
 import { useRouter } from 'next/router'
 import AuthImg from '../assets/images/auth_photo.png'
-const forgot_password:NextPage = () => {
+const ForgotPassword:NextPage = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
@@ -232,4 +232,4 @@ export const getServerSideProps = NotAuthorized(async context => {
 	return { props: {} }
 })
 
-export default forgot_password
+export default ForgotPassword

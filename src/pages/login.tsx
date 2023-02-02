@@ -129,7 +129,7 @@ const Login:NextPage = () => {
 											<span>Запомнить меня</span>
 										</div>
 										<Link
-											href={'/forgot_password'}
+											href={'/forgot'}
 											className='auth_detail_link'
 										>
 											Забыл пароль
