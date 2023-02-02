@@ -5,7 +5,7 @@ const ErrorPage:NextPage = () => {
 	return (
 		<main className='content'>
 			<div className='container'>
-				<h1>Error sorry</h1>
+				<h1>Error sorry. Working on solving</h1>
 			</div>
 		</main>
 	)
