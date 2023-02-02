@@ -230,13 +230,6 @@ const Signup = () => {
 												signupForm.formState.errors.confirmPassword.message}
 										</span>
 									</div>
-									{/* <button
-									disabled={!privacyPolicyState || !!signUpLoading}
-									className='auth_btn wdth'
-									type='submit'
-								>
-									{signUpLoading ? 'Loading...' : 'Зарегистрироваться'}
-								</button> */}
 								</div>
 								<div className='auth_privacy'>
 									<div className='auth_checkbox'>
