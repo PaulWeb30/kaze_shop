@@ -6,6 +6,7 @@ import {
 	ForgotPasswordSchema,
 	GetForgotPasswordCodeSchema,
 } from '@/utils/validation'
+import { NextPage } from 'next'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,7 +14,7 @@ import { NotAuthorized } from '@/hoc/OnlyNotAuthorized'
 import { Api } from '@/services'
 import { useRouter } from 'next/router'
 import AuthImg from '../assets/images/auth_photo.png'
-const forgot_password = () => {
+const forgot_password:NextPage = () => {
 	const router = useRouter()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)

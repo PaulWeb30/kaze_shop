@@ -17,7 +17,8 @@ import { useRouter } from 'next/router'
 import { Api } from '@/services'
 import { addUserInfo } from '@/redux/slices/user'
 import SpinnerLayout from '@/layouts/SpinnerLayout'
-const Signup = () => {
+import { NextPage } from 'next'
+const Signup:NextPage = () => {
 	const router = useRouter()
 	const dispatch = useAppDispatch()
 	const [errorMessage, setErrorMessage] = useState<string>('')

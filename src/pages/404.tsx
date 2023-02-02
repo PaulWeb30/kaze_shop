@@ -1,6 +1,7 @@
+import { NextPage } from 'next'
 import React from 'react'
 
-const ErrorPage = () => {
+const ErrorPage:NextPage = () => {
 	return (
 		<main className='content'>
 			<div className='container'>
