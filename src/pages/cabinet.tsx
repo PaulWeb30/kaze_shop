@@ -14,6 +14,11 @@ const CabinetPage: NextPage = () => {
 	)
 }
 
+
+export const getServerSideProps = withAuth(async context => {
+	return { props: {} }
+})
+
 // export const getServerSideProps = wrapper.getServerSideProps(
 // 	store => async context => {
 // 		if (!context.req.cookies.accessToken) {
@@ -46,15 +51,5 @@ const CabinetPage: NextPage = () => {
 // 	}
 // )
 
-export const getServerSideProps = withAuth(async context => {
-	return { props: {} }
-})
-
 export default CabinetPage
 
-// export const getServerSideProps = async () => {
-// 	const { data } = await axios.get(
-// 		'https://jsonplaceholder.typicode.com/users/1'
-// 	)
-// 	return { props: { data } }
-// }

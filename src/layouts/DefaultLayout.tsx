@@ -7,7 +7,7 @@ const RussoOne = Russo_One({
 	weight: '400',
 	subsets: ['latin', 'cyrillic'],
 })
-const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
+const DefaultLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
 	return (
 		<>
 			<Head>
@@ -36,4 +36,4 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
 	)
 }
 
-export default Layout
+export default DefaultLayout

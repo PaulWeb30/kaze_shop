@@ -12,6 +12,7 @@ import { useAppDispatch } from '@/redux/hooks'
 import { addUserInfo } from '@/redux/slices/user'
 import { useRouter } from 'next/router'
 import { setCookie } from 'nookies'
+import FormField from '../UI/FormField'
 const LoginForm = () => {
 	const loginForm = useForm({
 		mode: 'onChange',
@@ -20,7 +21,6 @@ const LoginForm = () => {
 	const router = useRouter()
 	const dispatch = useAppDispatch()
 	const [errorMessage, setErrorMessage] = useState<string>('')
-	const [passwordShown, setPasswordShown] = useState(false)
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
 	//if useLoginDto i have TS ignore((
 	const onSubmit: SubmitHandler<any> = async (dto: LoginDto) => {
@@ -47,54 +47,22 @@ const LoginForm = () => {
 		}
 	}
 
-	const togglePasswordShown = () => {
-		setPasswordShown(prev => !prev)
-	}
-
 	return (
 		<FormProvider {...loginForm}>
 			<form onSubmit={loginForm.handleSubmit(onSubmit)}>
-				<div className='auth_field'>
-					<label className='auth_label' htmlFor='email'>
-						E-mail
-					</label>
-					<div className='auth_input'>
-						<input
-							placeholder='Введите e-mail'
-							type='text'
-							{...loginForm.register('email')}
-						/>
-					</div>
-					<span className='auth_error'>
-						{loginForm.formState.errors.email &&
-							loginForm.formState.errors.email.message + ''}
-					</span>
-				</div>
-				<div className='auth_field'>
-					<label className='auth_label' htmlFor='email'>
-						Пароль
-					</label>
-					<div className='auth_input'>
-						<input
-							placeholder='Введите пароль'
-							type={passwordShown ? 'text' : 'password'}
-							{...loginForm.register('password')}
-						/>
-						<div onClick={togglePasswordShown} className='auth_hidden-icon'>
-							<Image
-								src={passwordShown ? showIcon : hidenIcon}
-								alt='show password icon'
-								width={24}
-								height={24}
-							/>
-						</div>
-					</div>
-
-					<span className='auth_error'>
-						{loginForm.formState.errors.password &&
-							loginForm.formState.errors.password.message + ''}
-					</span>
-				</div>
+				<FormField
+					type='text'
+					name='email'
+					label='E-mail2'
+					placeholder='Введите e-mail'
+				/>
+				<FormField
+					type='password'
+					name='password'
+					label='Пароль'
+					placeholder='Введите пароль'
+					isPassword={true}
+				/>
 				<div className='auth_detail'>
 					<div className='auth_checkbox'>
 						<input type='checkbox' />
