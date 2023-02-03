@@ -55,7 +55,7 @@ export const UserApi = (instance: AxiosInstance) => ({
 	},
 	async getForgotPasswordCode(dto: GetCodeDto) {
 		const { data } = await instance.post<GetCodeDto, { data: AuthResponse }>(
-			'/auth/code',
+			'/auth/code?lang=ua',
 			dto
 		)
 		return data
