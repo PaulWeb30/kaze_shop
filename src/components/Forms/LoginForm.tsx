@@ -3,9 +3,6 @@ import { SubmitHandler, useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoginFormSchema } from '@/utils/validation'
 import Link from 'next/link'
-import Image from 'next/image'
-import hidenIcon from '../../assets/icons/close_eye.svg'
-import showIcon from '../../assets/icons/show_eye.svg'
 import { LoginDto } from '@/types/auth'
 import { Api } from '@/services'
 import { useAppDispatch } from '@/redux/hooks'
@@ -22,7 +19,7 @@ const LoginForm = () => {
 	const dispatch = useAppDispatch()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
-	//if useLoginDto i have TS ignore((
+	//if use LoginDto i have TS error((
 	const onSubmit: SubmitHandler<any> = async (dto: LoginDto) => {
 		try {
 			setLoginLoading(true)
