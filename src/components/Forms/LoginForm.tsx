@@ -10,6 +10,7 @@ import { addUserInfo } from '@/redux/slices/user'
 import { useRouter } from 'next/router'
 import { setCookie } from 'nookies'
 import FormField from '../UI/FormField'
+import CheckBox from '../UI/CheckBox'
 const LoginForm = () => {
 	const loginForm = useForm({
 		mode: 'onChange',
@@ -19,6 +20,7 @@ const LoginForm = () => {
 	const dispatch = useAppDispatch()
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [loginLoading, setLoginLoading] = useState<boolean>(false)
+	const [isRemember, setIsRemember] = useState<boolean>(false)
 	//if use LoginDto i have TS error((
 	const onSubmit: SubmitHandler<any> = async (dto: LoginDto) => {
 		try {
@@ -50,7 +52,7 @@ const LoginForm = () => {
 				<FormField
 					type='text'
 					name='email'
-					label='E-mail2'
+					label='E-mail'
 					placeholder='Введите e-mail'
 				/>
 				<FormField
@@ -61,10 +63,7 @@ const LoginForm = () => {
 					isPassword={true}
 				/>
 				<div className='auth_detail'>
-					<div className='auth_checkbox'>
-						<input type='checkbox' />
-						<span>Запомнить меня</span>
-					</div>
+					<CheckBox isChecked={isRemember} setIsChecked={setIsRemember} text="Запомнить меня" />
 					<Link href={'/forgot'} className='auth_detail_link'>
 						Забыл пароль
 					</Link>

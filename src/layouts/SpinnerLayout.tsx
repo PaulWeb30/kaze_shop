@@ -9,7 +9,12 @@ const SpinnerLayout: React.FC<{ children: React.ReactNode }> = ({
 			setSpinnerShow(false)
 		}, 1500)
 	}, [])
-	return <>{spinnerShow ? <Spinner /> : children}</>
+	return (
+		<>
+			<Spinner isShow={spinnerShow} />
+			{children}
+		</>
+	);
 }
 
 export default SpinnerLayout

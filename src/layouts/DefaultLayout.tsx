@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useRef, useEffect } from 'react'
 import { Russo_One } from '@next/font/google'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
@@ -8,6 +8,23 @@ const RussoOne = Russo_One({
 	subsets: ['latin', 'cyrillic'],
 })
 const DefaultLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
+	const [isSticky, setIsSticky] = useState<boolean>(false);
+    const [headerHeight, setHeaderHeight] = useState<number | undefined>(0);
+
+	const headerRef = useRef<HTMLElement>(null);
+
+	useEffect(() => {
+        window.addEventListener('scroll', () => {
+            setHeaderHeight(headerRef.current?.offsetHeight);
+            
+            if(window.scrollY > 0) {
+                setIsSticky(true);
+            } else {
+                setIsSticky(false);
+            }
+        });
+    }, []);
+
 	return (
 		<>
 			<Head>
@@ -28,7 +45,7 @@ const DefaultLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
 			</Head>
 			
 			<div className='wrapper'>
-				<Header />
+				<Header isSticky={isSticky} headerRef={headerRef} />
 				{children}
 				{/* <Footer /> */}
 			</div>

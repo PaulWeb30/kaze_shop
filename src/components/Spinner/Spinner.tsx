@@ -1,8 +1,13 @@
-import React from 'react'
+import {FC} from 'react'
 import cl from './spinner.module.scss'
-const Spinner = () => {
+
+type Props = {
+	isShow?: boolean;
+}
+
+const Spinner: FC<Props> = ({isShow = true}) => {
 	return (
-		<div className={cl.body}>
+		<div className={`${cl.body} ${isShow ? cl.show : ''}`}>
 			<div className={cl.waviy}>
 				<span>K</span>
 				<span>A</span>

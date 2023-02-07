@@ -84,7 +84,7 @@ const ForgotPassword:NextPage = () => {
 						<Link href={'/'}> Главная</Link> |{' '}
 						<span>Забыли пароль</span>
 					</div>
-					<div className='auth_block'>
+					<div className='auth_block forgot_block'>
 						<div className='auth_image'>
 							<Image
 								src={AuthImg}
@@ -95,14 +95,15 @@ const ForgotPassword:NextPage = () => {
 								priority={true}
 							/>
 						</div>
-						<div className='auth_form'>
-							<h3 className='auth_title'>Забыли пароль</h3>
+						<div className='auth_form forgot_form'>
 							{!getCodeform ? (
+								<>
 								<form
 									onSubmit={getForgotPasswordCodeForm.handleSubmit(
 										onSubmitGetCode
 									)}
 								>
+																<h3 className='auth_title'>Забыли пароль</h3>
 									<div className='register_form'>
 										<div className='auth_field'>
 											<label className='auth_label' htmlFor='email'>
@@ -125,20 +126,23 @@ const ForgotPassword:NextPage = () => {
 									{errorMessage && (
 										<span className='auth_error'>{errorMessage}</span>
 									)}
-									<button
-										className='auth_btn'
-										type='submit'
-										disabled={loginLoading}
-									>
-										{loginLoading ? 'Loading...' : 'Восстановить пароль'}
-									</button>
 								</form>
+								<button
+									className='auth_btn'
+									type='submit'
+									disabled={loginLoading}
+								>
+									{loginLoading ? 'Loading...' : 'Восстановить пароль'}
+								</button>
+								</>
 							) : (
+								<>
 								<form
 									onSubmit={forgotPasswordForm.handleSubmit(
 										onSubmitForgotPassword
 									)}
 								>
+																<h3 className='auth_title'>Забыли пароль</h3>
 									<div className='register_form  w-100'>
 										<div className='auth_field'>
 											<label className='auth_label' htmlFor='email'>
@@ -212,14 +216,15 @@ const ForgotPassword:NextPage = () => {
 									{errorMessage && (
 										<span className='auth_error'>{errorMessage}</span>
 									)}
-									<button
-										className='auth_btn'
-										type='submit'
-										disabled={loginLoading}
-									>
-										{loginLoading ? 'Loading...' : 'Восстановить пароль'}
-									</button>
 								</form>
+								<button
+								className='auth_btn'
+								type='submit'
+								disabled={loginLoading}
+							>
+								{loginLoading ? 'Loading...' : 'Восстановить пароль'}
+							</button>
+							</>
 							)}
 						</div>
 					</div>

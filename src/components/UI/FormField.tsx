@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useFormContext } from 'react-hook-form'
 import Image from 'next/image'
-import hidenIcon from '../../assets/icons/close_eye.svg'
+import hidenIcon from '../../assets/icons/EyeClosed.svg'
 import showIcon from '../../assets/icons/show_eye.svg'
 interface FormFieldProps {
 	name: string
@@ -40,14 +40,15 @@ const FormField: FC<FormFieldProps> = ({
 				<label className='auth_label' htmlFor={name}>
 					{label}
 				</label>
-				<div className='auth_input'>
+				<div className={`auth_input`}>
 					<input
 						placeholder={placeholder}
 						type={isPassword ? inputType : type}
+						className={`${formState.errors?.[name]?.message ? 'error_input' : ''}`}
 						{...register(name)}
 					/>
 					{isPassword && (
-						<div onClick={togglePasswordShown} className='auth_hidden-icon'>
+						<div onClick={togglePasswordShown} className={`auth_hidden-icon ${!passwordShown ? 'hideIcon' : ''}`}>
 							<Image
 								src={passwordShown ? showIcon : hidenIcon}
 								alt='show password icon'

@@ -19,7 +19,7 @@ export const UserApi = (instance: AxiosInstance) => ({
 		return data
 	},
 	async registration(dto: CreateUserDto) {
-		const { data } = await instance.put<CreateUserDto, { data: AuthResponse }>(
+		const { data } = await instance.post<CreateUserDto, { data: AuthResponse }>(
 			API_URL + '/auth/signup',
 			dto
 		)

@@ -5,9 +5,13 @@ import shopingCartSVG from '../../assets/icons/ShoppingCart.svg'
 import accountSVG from '../../assets/icons/User.svg'
 import arrowSVG from '../../assets/icons/Arrow.svg'
 import { FC } from 'react'
-const HeaderInfo: FC<{ toggleBurgerFunc: () => void }> = ({
-	toggleBurgerFunc,
-}) => {
+
+type Props = {
+	toggleBurgerFunc: () => void;
+	showBurgerMenu: boolean;
+}
+
+const HeaderInfo: FC<Props> = ({toggleBurgerFunc, showBurgerMenu}) => {
 	return (
 		<div className={cl.header__info}>
 			<div className={cl.header__language}>
@@ -24,24 +28,28 @@ const HeaderInfo: FC<{ toggleBurgerFunc: () => void }> = ({
 					<span>УКР</span>
 				</div> */}
 			</div>
-			<Link href={'/cart'}>
-				<Image
-					src={shopingCartSVG}
-					alt='link to user basket'
-					width={28}
-					height={28}
-				/>
+			<Link href={'/cart'} legacyBehavior>
+				<a className={cl.icon}>
+					<Image
+						src={shopingCartSVG}
+						alt='link to user basket'
+						width={28}
+						height={28}
+					/>
+				</a>
 			</Link>
-			<Link href={'/cabinet'}>
-				<Image
-					src={accountSVG}
-					alt='link to user cabiner'
-					width={28}
-					height={28}
-					className={cl.header__info_accountSVG}
-				/>
+			<Link href={'/cabinet'} legacyBehavior>
+				<a className={cl.icon}>
+					<Image
+						src={accountSVG}
+						alt='link to user cabiner'
+						width={28}
+						height={28}
+						className={cl.header__info_accountSVG}
+					/>
+				</a>
 			</Link>
-			<div onClick={toggleBurgerFunc} className={cl.header__burger}>
+			<div onClick={toggleBurgerFunc} className={`${cl.header__burger} ${showBurgerMenu ? cl.header__burger_show : ''}`}>
 				<span></span>
 			</div>
 		</div>

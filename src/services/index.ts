@@ -7,7 +7,7 @@ import { setCookie } from 'nookies'
 export type ApiReturnType = {
 	user: ReturnType<typeof UserApi>
 }
-export const API_URL = 'http://localhost:7457/kaze_shop'
+export const API_URL = 'https://kazeshop-api-production.up.railway.app/kaze_shop'
 
 export const Api = (
 	ctx?: NextPageContext | GetServerSidePropsContext
@@ -19,7 +19,7 @@ export const Api = (
 		baseURL: API_URL,
 		withCredentials: true,
 		headers: {
-			Authorization: 'Bearer ' + token,
+			Authorization: 'Bearer ' + (token || ''),
 		},
 	})
 	instance.interceptors.response.use(

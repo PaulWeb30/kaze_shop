@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -11,13 +11,15 @@ import { useAppDispatch } from '@/redux/hooks'
 import Link from 'next/link'
 import Image from 'next/image'
 import AuthImg from '../assets/images/auth_photo.png'
-import hidenIcon from '../assets/icons/close_eye.svg'
+import hidenIcon from '../assets/icons/EyeClosed.svg'
 import showIcon from '../assets/icons/show_eye.svg'
 import { useRouter } from 'next/router'
 import { Api } from '@/services'
 import { addUserInfo } from '@/redux/slices/user'
 import SpinnerLayout from '@/layouts/SpinnerLayout'
 import { NextPage } from 'next'
+import CheckBox from '@/components/UI/CheckBox'
+
 const Signup:NextPage = () => {
 	const router = useRouter()
 	const dispatch = useAppDispatch()
@@ -25,21 +27,45 @@ const Signup:NextPage = () => {
 	const [signUpLoading, setSignUpLoading] = useState<boolean>(false)
 	const [phoneNumberValue, setPhoneNumberValue] = useState<string>('')
 	const [phoneNumberError, setPhoneNumberError] =
-		useState<string>('Incorrect number')
+		useState<string>('')
 	const [passwordShown, setPasswordShown] = useState(false)
 	const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
 	const [privacyPolicyState, setPrivacyPolicyState] = useState<boolean>(false)
 	const signupForm = useForm<CreateUserDto>({
-		mode: 'onChange',
+		mode: 'onSubmit',
 		resolver: yupResolver(RegisterFormSchema),
 	})
+	
+	const [initialTop, setInitialTop] = useState(0);
+	const [isStickyImage, setIsStickyImage] = useState<boolean>(false);
+
+	const imageRef = useRef(null);
+	const coordRef = useRef(null);
+	
+	const handleScroll = () => {
+		const imageRect = imageRef.current.getBoundingClientRect();
+  		const shouldBeSticky = imageRect.top <= 80 && window.pageYOffset > 100;
+		
+
+		setIsStickyImage(shouldBeSticky);
+	};
+
+
+	useEffect(() => {
+		setInitialTop(imageRef.current.offsetTop);
+		window.addEventListener("scroll", handleScroll);
+	
+		return () => {
+		  window.removeEventListener("scroll", handleScroll);
+		};
+	  }, []);
 
 	const handlePhoneNumberValue = (value: string) => {
-		if (!phoneNumberValue.startsWith('38') || phoneNumberValue.length < 9) {
+		/* if (!phoneNumberValue.startsWith('38') || phoneNumberValue.length < 9) {
 			setPhoneNumberError('Incorrect number')
 		} else {
 			setPhoneNumberError('')
-		}
+		} */
 		setPhoneNumberValue(value)
 	}
 
@@ -86,10 +112,10 @@ const Signup:NextPage = () => {
 		<SpinnerLayout>
 			<main className='content'>
 				<div className='container'>
-					<div className='page_coordinator'>
+					<div className='page_coordinator' ref={coordRef}>
 						<Link href={'/'}> Главная</Link> | <span>Регистрация</span>
 					</div>
-					<div className='auth_block'>
+					<div className='auth_block reg_block'>
 						<div className='auth_image none'>
 							<Image
 								src={AuthImg}
@@ -98,9 +124,16 @@ const Signup:NextPage = () => {
 								height={550}
 								quality={90}
 								priority={true}
+								ref={imageRef}
+								style={{position: isStickyImage ? 'fixed' : 'relative',
+								top: isStickyImage ? 0 : '',
+								left: isStickyImage ? coordRef.current.offsetLeft : '',
+								zIndex: 1,
+								paddingTop: isStickyImage ? 80 : 0,
+								height: isStickyImage ? 550 + 80 : 550}}
 							/>
 						</div>
-						<div className='auth_form'>
+						<div className={`auth_form reg_form ${isStickyImage ? 'sticky_form' : ''}`}>
 							<h3 className='auth_title'>Регистрация</h3>
 							<form onSubmit={signupForm.handleSubmit(onSubmit)}>
 								<div className='register_form'>
@@ -232,23 +265,7 @@ const Signup:NextPage = () => {
 										</span>
 									</div>
 								</div>
-								<div className='auth_privacy'>
-									<div className='auth_checkbox'>
-										<input
-											type='checkbox'
-											defaultChecked={privacyPolicyState}
-											onChange={() => setPrivacyPolicyState(prev => !prev)}
-										/>
-									</div>
-									<Link
-										href='https://docs.google.com/document/d/1tHo2_05AP3DrhMG3_jjheWCNUKqCD8tMv7EKd_AYTFg/edit'
-										target={'_blank'}
-										className='auth_privacy_link'
-									>
-										<span>Я согласен с условиями </span>
-										Политики конфиденциальности
-									</Link>
-								</div>
+								<CheckBox isChecked={privacyPolicyState} setIsChecked={setPrivacyPolicyState} text="Я согласен с условиями" linkText="Политики конфиденциальности" linkUrl="https://docs.google.com/document/d/1tHo2_05AP3DrhMG3_jjheWCNUKqCD8tMv7EKd_AYTFg/edit" customClass="privacy_checkbox" />
 								{errorMessage && (
 									<span className='auth_error'>{errorMessage}</span>
 								)}
