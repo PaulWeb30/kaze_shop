@@ -375,7 +375,9 @@
   }
 }
 
-.forgot_form {
+.forgot_form form {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   height: 500px;
 
